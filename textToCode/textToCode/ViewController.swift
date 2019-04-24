@@ -142,6 +142,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
     }
     
+    func wordListToCamelCase(_ words: [String]) -> String{
+        return words.joined(separator: " ").camelized
+    }
     
     func parseInput(result: String) -> String{
         var currentClass = -1;
@@ -154,7 +157,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             //NEW CLASS: eg: "new private class dog"
             if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "class"){
                 print("In new class");
-                classes.append(JavaClass.init(className: resultArr[wordIndex + 3], vis: resultArr[wordIndex + 1]));
+                classes.append(
+                    JavaClass.init(
+                        className: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])).uppercasingFirst,
+                        vis: resultArr[wordIndex + 1]
+                    )
+                );
                 currentClass += 1;
             }
             //new private variable String head
