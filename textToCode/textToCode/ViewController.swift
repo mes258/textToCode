@@ -178,14 +178,20 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "variable"){
                 print("In new var");
                 if(currentMethod == -1){
-                    classes[currentClass].addVar(varName: resultArr[wordIndex + 4], vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3]);
+                    classes[currentClass].addVar(varName: wordListToCamelCase(Array(resultArr[wordIndex + 4..<resultArr.count])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3]);
                 }else{
-                    classes[currentClass].addMethodVar(method: currentMethod, varName: resultArr[wordIndex + 4], vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3]);
+                    classes[currentClass].addMethodVar(method: currentMethod, varName: wordListToCamelCase(Array(resultArr[wordIndex + 4..<resultArr.count])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3]);
                 }
             }
         }
         
         return outputString(classes: classes)
+    }
+    
+    //input like: new class fish; new private class head shoulders knees toes
+    //TODO: make this? or don't? idk
+    func stringsToClass(_ : [String]) -> JavaClass {
+        return JavaClass(className: "", vis: "public")
     }
     
     func outputString(classes: [JavaClass]) -> String{
