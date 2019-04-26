@@ -15,6 +15,7 @@
 		1E424A3B226CDA0F00AFA493 /* JavaClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A3A226CDA0F00AFA493 /* JavaClass.swift */; };
 		1E424A3D226CDB8500AFA493 /* JavaMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A3C226CDB8500AFA493 /* JavaMethods.swift */; };
 		1E424A3F226CDC4500AFA493 /* JavaVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A3E226CDC4500AFA493 /* JavaVariables.swift */; };
+		1E86B02C227398DC00028E78 /* JavaExpressions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E86B02B227398DC00028E78 /* JavaExpressions.swift */; };
 		BFE34F352270062800A046B0 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE34F342270062800A046B0 /* Strings.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		1E424A3A226CDA0F00AFA493 /* JavaClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaClass.swift; sourceTree = "<group>"; };
 		1E424A3C226CDB8500AFA493 /* JavaMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaMethods.swift; sourceTree = "<group>"; };
 		1E424A3E226CDC4500AFA493 /* JavaVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaVariables.swift; sourceTree = "<group>"; };
+		1E86B02B227398DC00028E78 /* JavaExpressions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaExpressions.swift; sourceTree = "<group>"; };
 		BFE34F342270062800A046B0 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 				1E424A3A226CDA0F00AFA493 /* JavaClass.swift */,
 				1E424A3C226CDB8500AFA493 /* JavaMethods.swift */,
 				1E424A3E226CDC4500AFA493 /* JavaVariables.swift */,
+				1E86B02B227398DC00028E78 /* JavaExpressions.swift */,
 			);
 			path = textToCode;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E424A2B226CD7FF00AFA493 /* ViewController.swift in Sources */,
+				1E86B02C227398DC00028E78 /* JavaExpressions.swift in Sources */,
 				1E424A3B226CDA0F00AFA493 /* JavaClass.swift in Sources */,
 				1E424A3F226CDC4500AFA493 /* JavaVariables.swift in Sources */,
 				1E424A3D226CDB8500AFA493 /* JavaMethods.swift in Sources */,

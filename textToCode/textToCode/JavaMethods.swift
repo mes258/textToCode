@@ -12,8 +12,9 @@ class JavaMethods{
     private var name: String;
     private var visability: ItemVisability;
     private var returnType: String;
-    private var instanceVariables: [JavaVariables] = [];
+    private var localVariable: [JavaVariables] = [];
     
+    //Need to account for parameters
     init(name: String, vis: String, returnType: String) {
         self.name = name;
         self.visability = ItemVisability(rawValue: vis) ?? ItemVisability.defaultItem;
@@ -21,13 +22,13 @@ class JavaMethods{
     }
     
     func addVar(varName: String, vis: String, type: String){
-        instanceVariables.append(JavaVariables.init(name: varName, vis: vis, type: type));
+        localVariable.append(JavaVariables.init(name: varName, vis: vis, type: type));
     }
     
     func toString() -> String{
         var outputStr: String = "";
         outputStr += "\(visability.rawValue) \(returnType) \(name)(){ \n"
-        for instanceVar in instanceVariables{
+        for instanceVar in localVariable{
             outputStr += "    \(instanceVar.toString()) \n";
         }
         outputStr += "}";
