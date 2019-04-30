@@ -21,13 +21,18 @@ class JavaFor: JavaExpression{
         self.iterator = iterator;
     }
     
-    func toString() -> String{
+    func addExpression(exp: JavaExpression){
+        expressions.append(exp);
+    }
+    
+    override func toString() -> String{
         var outputString = "";
         outputString += "for(\(self.startCondition); \(self.endCondition); \(self.iterator)){ \n"
         for expression in expressions{
             outputString += INDENT;
             outputString += expression.toString();
         }
+        outputString += "} \n"
         return outputString;
     }
 }

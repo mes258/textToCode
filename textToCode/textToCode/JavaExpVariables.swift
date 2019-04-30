@@ -26,7 +26,7 @@ class JavaExpVariables: JavaExpression{
         return self.type;
     }
     
-    func toString() -> String{
+    override func toString() -> String{
         return "\(visability.rawValue) \(type) \(name);"
     }
 }
