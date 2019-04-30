@@ -37,6 +37,10 @@ class JavaMethod{
         return outputStr;
     }
     
+    func getName() -> String{
+        return name
+    }
+    
     func getVariables()-> [JavaVariable]{
         return localVariables;
     }

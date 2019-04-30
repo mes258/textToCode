@@ -18,8 +18,8 @@ enum ItemVisability: String{
 class JavaClass{
     var name: String;
     var visability: ItemVisability;
-    var classVariables: [JavaVariables] = [];
-    var methods: [JavaMethods] = [];
+    var classVariables: [JavaVariable] = [];
+    var methods: [JavaMethod] = [];
     
     init(className: String, vis: String) {
         self.name = className;
@@ -27,15 +27,21 @@ class JavaClass{
     }
     
     func addMethod(methodName: String, vis: String, returnType: String){
-        methods.append(JavaMethods.init(name: methodName, vis: vis, returnType: returnType));
+        methods.append(JavaMethod.init(name: methodName, vis: vis, returnType: returnType));
     }
     
     func addVar(varName: String, vis: String, type: String){
-        classVariables.append(JavaVariables.init(name: varName, vis: vis, type: type));
+        classVariables.append(JavaVariable.init(name: varName, vis: vis, type: type));
     }
     
     func addMethodVar(method: Int, varName: String, vis: String, type: String){
         methods[method].addVar(varName: varName, vis: vis, type: type);
+    }
+    
+    func findMethod(_ methodName: String) -> JavaMethod?{
+        return methods.first(where: { (m:JavaMethod) -> Bool in
+            return m.getName() == methodName
+        })
     }
     
     func toString() -> String{
