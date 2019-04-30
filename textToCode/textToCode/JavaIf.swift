@@ -8,16 +8,16 @@
 
 import Foundation
 
-class JavaIf: JavaExpressions{
+class JavaIf: JavaExpression{
 //    private var INDENT = "    ";
 //    private var condition: String;
 //    private var hasElse: Bool;
-//    var expressions: [JavaExpressions] = [];
-//    
+//    var expressions: [JavaExpression] = [];
+//
 //    init(condition: String){
 //        self.condition = condition;
 //    }
-//    
+//
 //    func toString() -> String{
 //        var outputString = "";
 //        outputString += "while(\(self.condition)){ \n"

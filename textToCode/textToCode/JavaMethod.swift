@@ -12,7 +12,7 @@ class JavaMethod{
     private var name: String;
     private var visability: ItemVisability;
     private var returnType: String;
-    private var localVariable: [JavaVariable] = [];
+    private var localVariables: [JavaVariable] = [];
     
     //Need to account for parameters
     init(name: String, vis: String, returnType: String) {
@@ -35,5 +35,9 @@ class JavaMethod{
         
         print(outputStr);
         return outputStr;
+    }
+    
+    func getVariables()-> [JavaVariable]{
+        return localVariables;
     }
 }

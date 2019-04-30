@@ -8,10 +8,10 @@
 
 import Foundation
 
-class JavaWhile: JavaExpressions{
+class JavaWhile: JavaExpression{
     private var INDENT = "    ";
     private var condition: String;
-    var expressions: [JavaExpressions] = [];
+    var expressions: [JavaExpression] = [];
     
     init(condition: String){
         self.condition = condition;

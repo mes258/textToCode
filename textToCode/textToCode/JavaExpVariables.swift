@@ -9,7 +9,7 @@
 import Foundation
 
 //Variables in methods
-class JavaExpVariables: JavaExpressions{
+class JavaExpVariables: JavaExpression{
     private var name: String;
     private var visability: ItemVisability;
     private final var type: String;

@@ -8,12 +8,12 @@
 
 import Foundation
 
-class JavaFor: JavaExpressions{
+class JavaFor: JavaExpression{
     private var INDENT = "    ";
     private var startCondition: String;
     private var endCondition: String;
     private var iterator: String;
-    var expressions: [JavaExpressions] = [];
+    var expressions: [JavaExpression] = [];
     
     init(sCondition: String, eCondition: String, iterator: String){
         self.startCondition = sCondition;
