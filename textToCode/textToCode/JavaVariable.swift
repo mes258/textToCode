@@ -1,5 +1,5 @@
 //
-//  JavaVariables.swift
+//  JavaVariable.swift
 //  textToCode
 //
 //  Created by Michael Smith on 4/21/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class JavaVariables{
+class JavaVariable{
     private var name: String;
     private var visability: ItemVisability;
     private final var type: String;

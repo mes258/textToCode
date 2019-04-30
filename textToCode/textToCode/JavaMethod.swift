@@ -1,5 +1,5 @@
 //
-//  JavaMethods.swift
+//  JavaMethod.swift
 //  textToCode
 //
 //  Created by Michael Smith on 4/21/19.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-class JavaMethods{
+class JavaMethod{
     private var name: String;
     private var visability: ItemVisability;
     private var returnType: String;
-    private var localVariable: [JavaVariables] = [];
+    private var localVariable: [JavaVariable] = [];
     
     //Need to account for parameters
     init(name: String, vis: String, returnType: String) {
@@ -22,7 +22,7 @@ class JavaMethods{
     }
     
     func addVar(varName: String, vis: String, type: String){
-        localVariable.append(JavaVariables.init(name: varName, vis: vis, type: type));
+        localVariable.append(JavaVariable.init(name: varName, vis: vis, type: type));
     }
     
     func toString() -> String{
