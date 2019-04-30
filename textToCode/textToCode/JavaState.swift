@@ -20,9 +20,47 @@ class JavaState{
     }
     
     private func varsInScope() -> [JavaVariable]{
-        let vars: [JavaVariable] = [];
-        
+        var vars: [JavaVariable] = []
+        if let cclass = currentClass{
+            vars.append(contentsOf: cclass.classVariables)
+        }
+        if let cmethod = currentMethod{
+            vars.append(contentsOf: cmethod.getVariables())
+        }
+        return vars
     }
     
+    private func methodsInScope() -> [JavaMethod]{
+        var methods: [JavaMethod] = []
+        if let cclass = currentClass{
+            methods.append(contentsOf: cclass.methods)
+        }
+        return methods
+    }
     
+    func findClass(_ className: String) -> JavaClass?{
+        return classes.first(where: { (j:JavaClass) -> Bool in
+            return j.name == className
+        })
+    }
+    
+    func goto(_ className: String){
+        if let xclass = findClass(className){
+            currentClass = xclass;
+        }
+    }
+    
+    func goto(_ className: String, _ methodName: String){
+        goto(className)
+        currentMethod = currentClass?.findMethod(methodName)
+    }
+    
+    func toString() -> String{
+        var output = "";
+        for xclass in classes{
+            output.append(xclass.toString())
+            output.append("\n")
+        }
+        return output
+    }
 }
