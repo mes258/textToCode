@@ -17,8 +17,14 @@ class SpeechProcessor {
         
         let lowerCaseResult: String = result.lowercased();
         let resultArr = lowerCaseResult.components(separatedBy: " ");
+        var atWord = 0;
         for wordIndex in 0..<resultArr.count{
-            
+            while(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 1] ~= "line"){
+                atWord += 1;
+                if(atWord > resultArr.count - 2){
+                    break;
+                }
+            }
             
             //NEW CLASS: eg: "new private class dog"
             if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "class"){

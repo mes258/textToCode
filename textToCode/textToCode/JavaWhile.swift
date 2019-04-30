@@ -17,7 +17,7 @@ class JavaWhile: JavaExpression{
         self.condition = condition;
     }
     
-    func addExpression(exp: JavaExpression){
+    override func addExpression(exp: JavaExpression){
         expressions.append(exp);
     }
     

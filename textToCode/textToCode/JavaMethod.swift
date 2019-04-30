@@ -9,10 +9,12 @@
 import Foundation
 
 class JavaMethod{
+    private var INDENT = "    ";
     private var name: String;
     private var visability: ItemVisability;
     private var returnType: String;
-    private var localVariables: [JavaVariable] = [];
+    private var expressions: [JavaExpression] = [];
+    private var inStructure = false;
     
     //Need to account for parameters
     init(name: String, vis: String, returnType: String) {
@@ -21,15 +23,25 @@ class JavaMethod{
         self.returnType = returnType;
     }
     
-    func addVar(varName: String, vis: String, type: String){
-        localVariables.append(JavaVariable.init(name: varName, vis: vis, type: type));
+    func exitExpression(){
+        inStructure = false;
+    }
+    
+    func addExpression(exp: JavaExpression){
+        if(inStructure){
+            expressions[expressions.count - 1].addExpression(exp: exp);
+        }else{
+            expressions.append(exp);
+            inStructure = true;
+        }
     }
     
     func toString() -> String{
         var outputStr: String = "";
         outputStr += "\(visability.rawValue) \(returnType) \(name)(){ \n"
-        for instanceVar in localVariables{
-            outputStr += "    \(instanceVar.toString()) \n";
+        for expression in expressions{
+            outputStr += INDENT;
+            outputStr += "\(expression.toString()) \n";
         }
         outputStr += "}";
         
@@ -41,7 +53,7 @@ class JavaMethod{
         return name
     }
     
-    func getVariables()-> [JavaVariable]{
-        return localVariables;
+    func getExpression()-> [JavaExpression]{
+        return expressions;
     }
 }

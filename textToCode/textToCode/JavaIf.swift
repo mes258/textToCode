@@ -32,7 +32,7 @@ class JavaIf: JavaExpression{
         currentScope = "else"
     }
     
-    func addExpression(exp: JavaExpression){
+    override func addExpression(exp: JavaExpression){
         switch currentScope {
         case "if":
             ifExpressions.append(exp);

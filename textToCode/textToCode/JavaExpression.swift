@@ -17,6 +17,10 @@ class JavaExpression{
         
     }
     
+    func addExpression(exp: JavaExpression){
+        
+    }
+    
     func toString() -> String{
         return "";
     }

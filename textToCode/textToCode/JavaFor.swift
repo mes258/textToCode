@@ -21,7 +21,7 @@ class JavaFor: JavaExpression{
         self.iterator = iterator;
     }
     
-    func addExpression(exp: JavaExpression){
+    override func addExpression(exp: JavaExpression){
         expressions.append(exp);
     }
     
