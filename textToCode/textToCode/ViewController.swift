@@ -97,27 +97,21 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
         }
         
+        /* SHOW THE LIVE RESULTS */
+        recognitionRequest.shouldReportPartialResults = true
         
-        recognitionRequest.shouldReportPartialResults = false /* SHOW THE LIVE RESULTS */
         recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
-            var isFinal = false
+            //var isFinal = false
             if result != nil {
-                /* CHANGE TO SHOW OR HIDE ALL RESULTS */
-//                let showAllResults = true;
-//                if(showAllResults){
-//                    let sentence = self.parseSegments(results: result?.transcriptions)
-//                    self.textOutput.attributedText = sentence;
-//                }else{
+                if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("new line"))!){
+                    self.bestTranscriptionOutput.text = result?.bestTranscription.formattedString;
+                    self.textOutput.text = self.parseInput(result: (result?.bestTranscription.formattedString)!);
+                }
                 
-                
-                self.bestTranscriptionOutput.text = result?.bestTranscription.formattedString;
-                self.textOutput.text = self.parseInput(result: (result?.bestTranscription.formattedString)!);
-                    //self.textOutput.text = result?.bestTranscription.formattedString;
-//                }
-                isFinal = (result?.isFinal)!
+                //isFinal = (result?.isFinal)!
             }
             
-            if error != nil || isFinal {
+            if error != nil {
                 self.audioEngine.stop()
                 inputNode!.removeTap(onBus: 0)
                 self.recognitionRequest = nil
@@ -142,64 +136,10 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
     }
     
-    func wordListToCamelCase(_ words: [String]) -> String{
-        return words.joined(separator: " ").camelized
-    }
-    
     func parseInput(result: String) -> String{
-        var currentClass = -1;
-        var currentMethod = -1;
-        var classes: [JavaClass]  = [];
-        
-        let lowerCaseResult: String = result.lowercased();
-        let resultArr = lowerCaseResult.components(separatedBy: " ");
-        for wordIndex in 0..<resultArr.count{
-            //NEW CLASS: eg: "new private class dog"
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "class"){
-                print("In new class");
-                classes.append(
-                    JavaClass.init(
-                        className: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])).uppercasingFirst,
-                        vis: resultArr[wordIndex + 1]
-                    )
-                );
-                currentClass += 1;
-            }
-            //new private variable String head
-            
-            //NEW METHOD: eg: "new public method kick returns boolean"
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "method"){
-                print("In new method");
-                classes[currentClass].addMethod(methodName: resultArr[wordIndex + 3], vis: resultArr[wordIndex + 1], returnType: resultArr[wordIndex + 5]);
-                currentMethod += 1;
-            }
-            
-            //NEW VAR: eg: "new private variable String leg"
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "variable"){
-                print("In new var");
-                if(currentMethod == -1){
-                    classes[currentClass].addVar(varName: wordListToCamelCase(Array(resultArr[wordIndex + 4..<resultArr.count])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3]);
-                }else{
-                    classes[currentClass].addMethodVar(method: currentMethod, varName: wordListToCamelCase(Array(resultArr[wordIndex + 4..<resultArr.count])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3]);
-                }
-            }
-        }
-        
-        return outputString(classes: classes)
+        return SpeechProcessor.processInput(result: result);
     }
     
-    //input like: new class fish; new private class head shoulders knees toes
-    //TODO: make this? or don't? idk
-    func stringsToClass(_ : [String]) -> JavaClass {
-        return JavaClass(className: "", vis: "public")
-    }
     
-    func outputString(classes: [JavaClass]) -> String{
-        var outputStr: String = "";
-        for javaClass in classes{
-            outputStr += javaClass.toString();
-        }
-        return outputStr;
-    }
 }
 

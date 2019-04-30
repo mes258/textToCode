@@ -16,6 +16,13 @@
 		1E424A3D226CDB8500AFA493 /* JavaMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A3C226CDB8500AFA493 /* JavaMethods.swift */; };
 		1E424A3F226CDC4500AFA493 /* JavaVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A3E226CDC4500AFA493 /* JavaVariables.swift */; };
 		1E86B02C227398DC00028E78 /* JavaExpressions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E86B02B227398DC00028E78 /* JavaExpressions.swift */; };
+		1E9BA1302278A736005BB417 /* SpeechProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA12F2278A736005BB417 /* SpeechProcessor.swift */; };
+		1E9BA1322278AE19005BB417 /* JavaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1312278AE19005BB417 /* JavaState.swift */; };
+		1E9BA1342278B05F005BB417 /* JavaIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1332278B05F005BB417 /* JavaIf.swift */; };
+		1E9BA1362278B08F005BB417 /* JavaFor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1352278B08F005BB417 /* JavaFor.swift */; };
+		1E9BA1382278B09D005BB417 /* JavaWhile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1372278B09D005BB417 /* JavaWhile.swift */; };
+		1E9BA13A2278B0B9005BB417 /* JavaExpVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1392278B0B9005BB417 /* JavaExpVariables.swift */; };
+		1E9BA13C2278B0D0005BB417 /* JavaReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA13B2278B0D0005BB417 /* JavaReturn.swift */; };
 		BFE34F352270062800A046B0 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE34F342270062800A046B0 /* Strings.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +38,13 @@
 		1E424A3C226CDB8500AFA493 /* JavaMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaMethods.swift; sourceTree = "<group>"; };
 		1E424A3E226CDC4500AFA493 /* JavaVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaVariables.swift; sourceTree = "<group>"; };
 		1E86B02B227398DC00028E78 /* JavaExpressions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaExpressions.swift; sourceTree = "<group>"; };
+		1E9BA12F2278A736005BB417 /* SpeechProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechProcessor.swift; sourceTree = "<group>"; };
+		1E9BA1312278AE19005BB417 /* JavaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaState.swift; sourceTree = "<group>"; };
+		1E9BA1332278B05F005BB417 /* JavaIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaIf.swift; sourceTree = "<group>"; };
+		1E9BA1352278B08F005BB417 /* JavaFor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaFor.swift; sourceTree = "<group>"; };
+		1E9BA1372278B09D005BB417 /* JavaWhile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaWhile.swift; sourceTree = "<group>"; };
+		1E9BA1392278B0B9005BB417 /* JavaExpVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaExpVariables.swift; sourceTree = "<group>"; };
+		1E9BA13B2278B0D0005BB417 /* JavaReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaReturn.swift; sourceTree = "<group>"; };
 		BFE34F342270062800A046B0 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +89,13 @@
 				1E424A3C226CDB8500AFA493 /* JavaMethods.swift */,
 				1E424A3E226CDC4500AFA493 /* JavaVariables.swift */,
 				1E86B02B227398DC00028E78 /* JavaExpressions.swift */,
+				1E9BA12F2278A736005BB417 /* SpeechProcessor.swift */,
+				1E9BA1312278AE19005BB417 /* JavaState.swift */,
+				1E9BA1332278B05F005BB417 /* JavaIf.swift */,
+				1E9BA1352278B08F005BB417 /* JavaFor.swift */,
+				1E9BA1372278B09D005BB417 /* JavaWhile.swift */,
+				1E9BA1392278B0B9005BB417 /* JavaExpVariables.swift */,
+				1E9BA13B2278B0D0005BB417 /* JavaReturn.swift */,
 			);
 			path = textToCode;
 			sourceTree = "<group>";
@@ -150,12 +171,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E9BA1342278B05F005BB417 /* JavaIf.swift in Sources */,
 				1E424A2B226CD7FF00AFA493 /* ViewController.swift in Sources */,
 				1E86B02C227398DC00028E78 /* JavaExpressions.swift in Sources */,
+				1E9BA1322278AE19005BB417 /* JavaState.swift in Sources */,
 				1E424A3B226CDA0F00AFA493 /* JavaClass.swift in Sources */,
+				1E9BA1382278B09D005BB417 /* JavaWhile.swift in Sources */,
+				1E9BA13A2278B0B9005BB417 /* JavaExpVariables.swift in Sources */,
 				1E424A3F226CDC4500AFA493 /* JavaVariables.swift in Sources */,
 				1E424A3D226CDB8500AFA493 /* JavaMethods.swift in Sources */,
+				1E9BA13C2278B0D0005BB417 /* JavaReturn.swift in Sources */,
+				1E9BA1362278B08F005BB417 /* JavaFor.swift in Sources */,
 				BFE34F352270062800A046B0 /* Strings.swift in Sources */,
+				1E9BA1302278A736005BB417 /* SpeechProcessor.swift in Sources */,
 				1E424A29226CD7FF00AFA493 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
