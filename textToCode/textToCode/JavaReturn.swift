@@ -16,13 +16,7 @@ class JavaReturn: JavaExpression{
         self.returnValue = returnString;
     }
     
-    func toString() -> String{
-        var outputString = "";
-        outputString += "while(\(self.condition)){ \n"
-        for expression in expressions{
-            outputString += INDENT;
-            outputString += expression.toString();
-        }
-        return outputString;
+    override func toString() -> String{
+        return "return \(self.returnValue)\n"
     }
 }

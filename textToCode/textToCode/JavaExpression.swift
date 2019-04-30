@@ -17,5 +17,7 @@ class JavaExpression{
         
     }
     
-    
+    func toString() -> String{
+        return "";
+    }
 }
