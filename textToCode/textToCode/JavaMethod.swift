@@ -22,13 +22,13 @@ class JavaMethod{
     }
     
     func addVar(varName: String, vis: String, type: String){
-        localVariable.append(JavaVariable.init(name: varName, vis: vis, type: type));
+        localVariables.append(JavaVariable.init(name: varName, vis: vis, type: type));
     }
     
     func toString() -> String{
         var outputStr: String = "";
         outputStr += "\(visability.rawValue) \(returnType) \(name)(){ \n"
-        for instanceVar in localVariable{
+        for instanceVar in localVariables{
             outputStr += "    \(instanceVar.toString()) \n";
         }
         outputStr += "}";
