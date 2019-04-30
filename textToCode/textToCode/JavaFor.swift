@@ -9,10 +9,11 @@
 import Foundation
 
 class JavaFor: JavaExpressions{
+    private var INDENT = "    ";
     private var startCondition: String;
     private var endCondition: String;
     private var iterator: String;
-    var expressionList: [JavaExpressions] = [];
+    var expressions: [JavaExpressions] = [];
     
     init(sCondition: String, eCondition: String, iterator: String){
         self.startCondition = sCondition;
@@ -21,9 +22,12 @@ class JavaFor: JavaExpressions{
     }
     
     func toString() -> String{
-        var currentString = "for(";
-        currentString.append(self.startCondition);
-        return currentString;
+        var outputString = "";
+        outputString += "for(\(self.startCondition); \(self.endCondition); \(self.iterator)){ \n"
+        for expression in expressions{
+            outputString += INDENT;
+            outputString += expression.toString();
+        }
+        return outputString;
     }
-    
 }
