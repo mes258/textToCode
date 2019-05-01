@@ -100,16 +100,18 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         /* SHOW THE LIVE RESULTS */
         recognitionRequest.shouldReportPartialResults = true
         var firstSegment = 0;
+        var numOfStops = 0;
         recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
             //var isFinal = false
             if result != nil {
-                print("new segments!");
-                print("first segment = \(firstSegment)");
-                print(result?.bestTranscription.formattedString);
+                //print("new segments!");
+                //print("first segment = \(firstSegment)");
+                print("Current input::: \(result?.bestTranscription.formattedString)");
                 //Check for "new line"
-                if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("\n"))!){
+                if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("stop"))!){
                     
-                    print("in the if statement, line 112");
+                    print(result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring)
+
                     //Only pasrse the new segments
                     let allSegments: [SFTranscriptionSegment] = (result?.bestTranscription.segments)!;
                     var newSegments = Array(allSegments.suffix(from: firstSegment));
@@ -121,7 +123,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                     self.textOutput.text = self.parseInput(resultArr: newSegments);
                     
                     //update first segment:
-                    firstSegment = (result?.bestTranscription.segments.count)! - 1;
+                    firstSegment = (result?.bestTranscription.segments.count)!;
                 }
                 
                 //isFinal = (result?.isFinal)!
@@ -156,12 +158,15 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         var resultStr: String = "";
         for seg in resultArr{
             //Need to remove /n characters
-            //if(!seg.substring.contains("new line")){
+           if(seg.substring.contains("stop")){
+                resultStr += seg.substring;
+           }else{
                 resultStr += seg.substring;
                 resultStr += " ";
-            //}else{
-                //resultStr += seg.substring.prefix;
-            //}
+            
+                //let newString = seg.substring.replacingOccurrences(of: "stop", with: " ")
+                //resultStr += newString;
+            }
         }
         
         return SpeechProcessor.processInput(result: resultStr);
