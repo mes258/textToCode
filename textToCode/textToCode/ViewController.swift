@@ -179,6 +179,14 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         return SpeechProcessor.processInput(result: resultStr);
     }
     
+    @IBAction func share(_ sender: Any) {
+        let program = SpeechProcessor.state.toString()
+        
+        let controller = UIActivityViewController(activityItems: [program], applicationActivities: nil)
+        controller.excludedActivityTypes = [.postToTwitter, .assignToContact, .saveToCameraRoll]
+        
+        self.present(controller, animated: true, completion: nil)
+    }
     
 }
 
