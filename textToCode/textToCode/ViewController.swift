@@ -179,13 +179,28 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         return SpeechProcessor.processInput(result: resultStr);
     }
     
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
     @IBAction func share(_ sender: Any) {
         let program = SpeechProcessor.state.toString()
         
-        let controller = UIActivityViewController(activityItems: [program], applicationActivities: nil)
+        let filename = getDocumentsDirectory().appendingPathComponent("program.txt")
+        do {
+            try program.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+        } catch {/* error */}
+        
+        let objectsToShare:URL = filename
+        let sharedObjects:[AnyObject] = [objectsToShare as AnyObject]
+        
+        let controller = UIActivityViewController(activityItems: sharedObjects, applicationActivities: nil)
         controller.excludedActivityTypes = [.postToTwitter, .assignToContact, .saveToCameraRoll]
         
         self.present(controller, animated: true, completion: nil)
+        
     }
     
 }
