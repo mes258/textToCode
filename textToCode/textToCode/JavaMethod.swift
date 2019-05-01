@@ -13,7 +13,7 @@ class JavaMethod{
     private var name: String;
     private var visability: ItemVisability;
     private var returnType: String;
-    private var expressions: [JavaExpression] = [];
+    var expressions: [JavaExpression] = [];
     private var inStructure = false;
     
     //Need to account for parameters

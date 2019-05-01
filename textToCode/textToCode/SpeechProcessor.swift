@@ -25,7 +25,13 @@ class SpeechProcessor {
         /* SCRIPT::
          new private class dog stop
          new private method hello returns string stop
+         return bye stop
+         new public variable boolean bye stop
+
+        
          
+         new private method good bye returns integer stop
+
          
          while bye equals true stop
             return bye stop
@@ -33,8 +39,6 @@ class SpeechProcessor {
          
          
          new public variable string hi there equals seven stop
-         new private method good bye returns integer stop
-         new public variable boolean bye stop
          
          if bye equals true stop
             bye equals false stop
@@ -100,6 +104,39 @@ class SpeechProcessor {
                 state.currentMethod?.addExpression(exp: newReturn);
                 break;
             }
+            
+//            if bye equals true stop
+//            bye equals false stop
+//            else stop
+//            bye equals true stop
+            
+            //IF: eg: see above^
+            var newIf: JavaIf = JavaIf.init(condition: "");
+            if(resultArr[wordIndex] ~= "if"){
+                let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
+                newIf = JavaIf.init(condition: condition);
+                state.currentMethod?.addExpression(exp: newIf);
+                break;
+            }
+            
+            if(resultArr[wordIndex] ~= "else" && resultArr.count == 1){
+//                let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
+                newIf.addElse();
+                //state.currentMethod?.addExpression(exp: newIf);
+                break;
+            }
+            
+            //ELSE IF:
+            if(resultArr[wordIndex] ~= "else" && resultArr[wordIndex + 1] ~= "if"){
+                let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
+                newIf.addElseIf(condition: condition);
+                //state.currentMethod?.addExpression(exp: newIf);
+                break;
+            }
+            
+            //ELSE:
+            
+            
             
         }
         
