@@ -119,6 +119,7 @@ class SpeechProcessor {
                 break;
             }
             
+            //else
             if(resultArr[wordIndex] ~= "else" && resultArr.count == 1){
 //                let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
                 newIf.addElse();
@@ -140,7 +141,7 @@ class SpeechProcessor {
                 state.currentMethod?.addExpression(exp: lineOfCode);
             }
             
-            //ELSE:
+            
             
             
             

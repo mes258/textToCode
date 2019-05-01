@@ -15,4 +15,9 @@ class JavaCode: JavaExpression{
         self.exp = exp;
     }
     
+    override func toString() -> String{
+        return "    \(self.exp)";
+    }
+    
+    
 }
