@@ -61,6 +61,32 @@ class JavaState{
         currentMethod = currentClass?.findMethod(methodName)
     }
     
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    func fileNames() -> [URL]{
+        var urls: [URL] = []
+        for xclass in classes{
+            urls.append(getDocumentsDirectory().appendingPathComponent(xclass.name));
+        }
+        return urls
+    }
+    
+    func saveFilesAndGetNames() -> [URL]{
+        var urls: [URL] = []
+        for xclass in classes{
+            let name = getDocumentsDirectory().appendingPathComponent(xclass.name+".java")
+            do {
+                try xclass.toString().write(to: name, atomically: true, encoding: String.Encoding.utf8)
+                urls.append(name);
+            } catch {/* error */}
+        }
+        return urls
+    }
+    
     func toString() -> String{
         var output = "";
         for xclass in classes{
