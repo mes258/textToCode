@@ -25,28 +25,42 @@ class SpeechProcessor {
         /* SCRIPT::
          new private class dog stop
          new private method hello returns string stop
+         
+         
+         while bye equals true stop
+            return bye stop
+         
+         
+         
          new public variable string hi there equals seven stop
          new private method good bye returns integer stop
          new public variable boolean bye stop
+         
+         if bye equals true stop
+            bye equals false stop
+         else stop
+            bye equals true stop
  
          */
         for wordIndex in 0..<resultArr.count{
             
             //NEW CLASS: eg: "new private class dog stop "
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "c"){
+            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "c"){
                 print("In new class");
                 state.addClass(newClass: JavaClass.init(className: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])).uppercasingFirst, vis: resultArr[wordIndex + 1]));
+                break;
             }
             
             //NEW METHOD: eg: "new public method kick returns boolean stop"
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "m"){
+            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "m"){
                 print("In new method");
                 state.currentClass?.addMethod(methodName: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count - 2])).uppercasingFirst, vis: resultArr[wordIndex + 1], returnType: resultArr[wordIndex + 5]);
                 state.currentMethod = state.currentClass?.methods[(state.currentClass?.methods.count)! - 1];
+                break;
             }
             
            //NEW VAR: eg: "new private variable String leg stop"
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2] ~= "v"){
+            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "v"){
                 if state.currentMethod == nil{
                     //NEW CLASS VAR: eg: "new private variable String leg"
                     print("In new class var");
@@ -64,7 +78,29 @@ class SpeechProcessor {
                         state.currentMethod?.addExpression(exp: newVar);
                     }
                 }
+                break;
             }
+            
+            //while bye equals true stop
+            //WHILE: eg: while bye equals true stop
+            if(resultArr[wordIndex] ~= "while"){
+                print("In new while");
+                let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
+                let newWhile: JavaWhile = JavaWhile.init(condition: condition)
+                
+                state.currentMethod?.addExpression(exp: newWhile)
+                break;
+            }
+            
+            //return bye stop
+            //RETURN: eg: return bye stop
+            if(resultArr[wordIndex] ~= "return"){
+                let returnVal: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
+                let newReturn: JavaReturn = JavaReturn.init(returnString: returnVal);
+                state.currentMethod?.addExpression(exp: newReturn);
+                break;
+            }
+            
         }
         
         return state.toString();

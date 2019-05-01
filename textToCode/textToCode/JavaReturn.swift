@@ -17,6 +17,6 @@ class JavaReturn: JavaExpression{
     }
     
     override func toString() -> String{
-        return "return \(self.returnValue);\n"
+        return "    return \(self.returnValue);\n"
     }
 }

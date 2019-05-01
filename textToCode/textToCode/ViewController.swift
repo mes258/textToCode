@@ -109,21 +109,28 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 print("Current input::: \(result?.bestTranscription.formattedString)");
                 //Check for "new line"
                 if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("stop"))!){
+                    if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 2].substring.lowercased().contains("stop"))!){
+                        self.audioEngine.stop()
+                        self.recognitionRequest?.endAudio()
+                        self.recordButton.isEnabled = false
+                        self.recordButton.setTitle("Start Recording", for: .normal)
+                    }else{
+                        print(result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring)
+                        
+                        //Only pasrse the new segments
+                        let allSegments: [SFTranscriptionSegment] = (result?.bestTranscription.segments)!;
+                        var newSegments = Array(allSegments.suffix(from: firstSegment));
+                        
+                        //the raw input
+                        self.bestTranscriptionOutput.text = result?.bestTranscription.formattedString;
+                        
+                        //parse the new segments
+                        self.textOutput.text = self.parseInput(resultArr: newSegments);
+                        
+                        //update first segment:
+                        firstSegment = (result?.bestTranscription.segments.count)!;
+                    }
                     
-                    print(result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring)
-
-                    //Only pasrse the new segments
-                    let allSegments: [SFTranscriptionSegment] = (result?.bestTranscription.segments)!;
-                    var newSegments = Array(allSegments.suffix(from: firstSegment));
-                    
-                    //the raw input
-                    self.bestTranscriptionOutput.text = result?.bestTranscription.formattedString;
-                    
-                    //parse the new segments
-                    self.textOutput.text = self.parseInput(resultArr: newSegments);
-                    
-                    //update first segment:
-                    firstSegment = (result?.bestTranscription.segments.count)!;
                 }
                 
                 //isFinal = (result?.isFinal)!
