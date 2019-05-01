@@ -103,9 +103,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
             //var isFinal = false
             if result != nil {
+                print("new segments!");
+                print("first segment = \(firstSegment)");
+                print(result?.bestTranscription.formattedString);
                 //Check for "new line"
-                if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("new line"))!){
+                if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("\n"))!){
                     
+                    print("in the if statement, line 112");
                     //Only pasrse the new segments
                     let allSegments: [SFTranscriptionSegment] = (result?.bestTranscription.segments)!;
                     var newSegments = Array(allSegments.suffix(from: firstSegment));
@@ -151,11 +155,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     func parseInput(resultArr: [SFTranscriptionSegment]) -> String{
         var resultStr: String = "";
         for seg in resultArr{
-            if(!seg.substring.contains("new line")){
+            //Need to remove /n characters
+            //if(!seg.substring.contains("new line")){
                 resultStr += seg.substring;
-            }else{
+                resultStr += " ";
+            //}else{
                 //resultStr += seg.substring.prefix;
-            }
+            //}
         }
         
         return SpeechProcessor.processInput(result: resultStr);
