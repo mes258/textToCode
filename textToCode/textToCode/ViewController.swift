@@ -67,7 +67,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
-            recordButton.isEnabled = false
+            recordButton.isEnabled = true
             recordButton.setTitle("Start Recording", for: .normal)
         } else {
             startRecording()
@@ -112,7 +112,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                     if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 2].substring.lowercased().contains("stop"))!){
                         self.audioEngine.stop()
                         self.recognitionRequest?.endAudio()
-                        self.recordButton.isEnabled = false
+                        self.recordButton.isEnabled = true
                         self.recordButton.setTitle("Start Recording", for: .normal)
                     }else{
                         print(result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring)

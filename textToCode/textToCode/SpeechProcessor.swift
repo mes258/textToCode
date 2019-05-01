@@ -134,6 +134,12 @@ class SpeechProcessor {
                 break;
             }
             
+            else{
+                let line: String = Array(resultArr[wordIndex..<resultArr.count]).joined(separator: " ");
+                let lineOfCode: JavaCode = JavaCode.init(exp: line)
+                state.currentMethod?.addExpression(exp: lineOfCode);
+            }
+            
             //ELSE:
             
             

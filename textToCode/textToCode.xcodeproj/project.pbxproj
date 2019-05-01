@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E173640227A39FB00B66AAF /* JavaCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17363F227A39FB00B66AAF /* JavaCode.swift */; };
 		1E424A29226CD7FF00AFA493 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A28226CD7FF00AFA493 /* AppDelegate.swift */; };
 		1E424A2B226CD7FF00AFA493 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A2A226CD7FF00AFA493 /* ViewController.swift */; };
 		1E424A2E226CD7FF00AFA493 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E424A2C226CD7FF00AFA493 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E17363F227A39FB00B66AAF /* JavaCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaCode.swift; sourceTree = "<group>"; };
 		1E424A25226CD7FF00AFA493 /* textToCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = textToCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E424A28226CD7FF00AFA493 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E424A2A226CD7FF00AFA493 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				1E9BA1352278B08F005BB417 /* JavaFor.swift */,
 				1E9BA1372278B09D005BB417 /* JavaWhile.swift */,
 				1E9BA1392278B0B9005BB417 /* JavaExpVariables.swift */,
+				1E17363F227A39FB00B66AAF /* JavaCode.swift */,
 				1E9BA13B2278B0D0005BB417 /* JavaReturn.swift */,
 			);
 			path = textToCode;
@@ -177,6 +180,7 @@
 				1E9BA1322278AE19005BB417 /* JavaState.swift in Sources */,
 				1E424A3B226CDA0F00AFA493 /* JavaClass.swift in Sources */,
 				1E9BA1382278B09D005BB417 /* JavaWhile.swift in Sources */,
+				1E173640227A39FB00B66AAF /* JavaCode.swift in Sources */,
 				1E9BA13A2278B0B9005BB417 /* JavaExpVariables.swift in Sources */,
 				1E424A3F226CDC4500AFA493 /* JavaVariable.swift in Sources */,
 				1E424A3D226CDB8500AFA493 /* JavaMethod.swift in Sources */,
