@@ -27,6 +27,16 @@ class JavaMethod{
         inStructure = false;
     }
     
+    func getVariables()->[JavaExpVariables]{
+        var currentVars: [JavaExpVariables] = [];
+        for exp in expressions{
+            if let isVar = exp as? JavaExpVariables{
+                currentVars.append(exp as! JavaExpVariables);
+            }
+        }
+        return currentVars;
+    }
+    
     func addExpression(exp: JavaExpression){
         if(inStructure){
             expressions[expressions.count - 1].addExpression(exp: exp);

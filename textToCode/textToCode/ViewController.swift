@@ -99,13 +99,25 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         /* SHOW THE LIVE RESULTS */
         recognitionRequest.shouldReportPartialResults = true
-        
+        var firstSegment = 0;
         recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
             //var isFinal = false
             if result != nil {
+                //Check for "new line"
                 if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("new line"))!){
+                    
+                    //Only pasrse the new segments
+                    let allSegments: [SFTranscriptionSegment] = (result?.bestTranscription.segments)!;
+                    var newSegments = Array(allSegments.suffix(from: firstSegment));
+                    
+                    //the raw input
                     self.bestTranscriptionOutput.text = result?.bestTranscription.formattedString;
-                    self.textOutput.text = self.parseInput(result: (result?.bestTranscription.formattedString)!);
+                    
+                    //parse the new segments
+                    self.textOutput.text = self.parseInput(resultArr: newSegments);
+                    
+                    //update first segment:
+                    firstSegment = (result?.bestTranscription.segments.count)! - 1;
                 }
                 
                 //isFinal = (result?.isFinal)!
@@ -136,8 +148,17 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
     }
     
-    func parseInput(result: String) -> String{
-        return SpeechProcessor.processInput(result: result);
+    func parseInput(resultArr: [SFTranscriptionSegment]) -> String{
+        var resultStr: String = "";
+        for seg in resultArr{
+            if(!seg.substring.contains("new line")){
+                resultStr += seg.substring;
+            }else{
+                //resultStr += seg.substring.prefix;
+            }
+        }
+        
+        return SpeechProcessor.processInput(result: resultStr);
     }
     
     

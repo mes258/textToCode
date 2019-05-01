@@ -19,13 +19,19 @@ class JavaState{
         
     }
     
-    private func varsInScope() -> [JavaVariable]{
-        var vars: [JavaVariable] = []
+    func addClass(newClass: JavaClass){
+        classes.append(newClass);
+        currentClass = classes[classes.count - 1];
+    }
+    
+    private func varsInScope() -> ([JavaVariable], [JavaExpVariables]){
+        var vars: (classVars: [JavaVariable], methodVars: [JavaExpVariables]) = ([],[]);
+        
         if let cclass = currentClass{
-            vars.append(contentsOf: cclass.classVariables)
+            vars.classVars.append(contentsOf: cclass.classVariables);
         }
         if let cmethod = currentMethod{
-            vars.append(contentsOf: cmethod.getVariables())
+            vars.methodVars.append(contentsOf: cmethod.getVariables());
         }
         return vars
     }

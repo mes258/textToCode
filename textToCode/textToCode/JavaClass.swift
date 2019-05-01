@@ -34,9 +34,9 @@ class JavaClass{
         classVariables.append(JavaVariable.init(name: varName, vis: vis, type: type));
     }
     
-    func addMethodVar(method: Int, varName: String, vis: String, type: String){
-        methods[method].addVar(varName: varName, vis: vis, type: type);
-    }
+//    func addMethodVar(method: Int, varName: String, vis: String, type: String){
+//        methods[method].addVar(varName: varName, vis: vis, type: type);
+//    }
     
     func findMethod(_ methodName: String) -> JavaMethod?{
         return methods.first(where: { (m:JavaMethod) -> Bool in
