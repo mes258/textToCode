@@ -209,27 +209,37 @@ class SpeechProcessor {
         print(inputPhrase);
         var phrase = inputPhrase;
         var removeWords: [Int] = [];
+        var inQuote = false;
         for var i in 0..<phrase.count{
-            if(phrase[i] == "equals" && isCondition){
-                phrase[i] = "==";
+            if(phrase[i] == "\""){
+                phrase[i] = "\"";
+                inQuote = !inQuote;
             }else{
-                if((phrase[i] == "greater" || phrase[i] == "less") && phrase[i + 1] == "than"){
-                    phrase[i] = specialWords[phrase[i]]!;
-                    removeWords.append(i + 1);
-                }else{
-                    let hasVal = specialWords[phrase[i]] != nil
-                    if(hasVal){
-                        phrase[i] = specialWords[phrase[i]]!;
+                if(!inQuote){
+                    if(phrase[i] == "equals" && isCondition){
+                        phrase[i] = "==";
+                    }else{
+                        if((phrase[i] == "greater" || phrase[i] == "less") && phrase[i + 1] == "than"){
+                            phrase[i] = specialWords[phrase[i]]!;
+                            removeWords.append(i + 1);
+                        }else{
+                            let hasVal = specialWords[phrase[i]] != nil
+                            if(hasVal){
+                                phrase[i] = specialWords[phrase[i]]!;
+                            }
+                        }
                     }
                 }
-                
             }
-
         }
         
         removeWords = removeWords.reversed();
         for num in removeWords{
             phrase.remove(at: num);
+        }
+        
+        if(inQuote){
+            phrase.append("\"");
         }
         
         print(phrase);
