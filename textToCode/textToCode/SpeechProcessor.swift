@@ -11,6 +11,30 @@ import Foundation
 class SpeechProcessor {
     
     static var state: JavaState = JavaState.init();
+    static let specialWords = ["equals": "=",
+                               "booleanEquals": "=",
+                               "plus": "+",
+                               "minus": "-",
+                               "divide": "/",
+                               "open parenthesis": "(",
+                               "close parenthiesis": ")",
+                               "and": "&&",
+                               "or": "||",
+                               "less": "<",
+                               "greater": ">",
+                               "one": "1",
+                               "two": "2",
+                               "three": "3",
+                               "four": "4",
+                               "five": "5",
+                               "six": "6",
+                               "seven": "7",
+                               "eight": "8",
+                               "nine": "9",
+                               "ten": "10",
+                               
+                               ]
+    
     static func processInput(result: String) -> String{
     
         
@@ -174,29 +198,6 @@ class SpeechProcessor {
     static func wordListToCamelCase(_ words: [String]) -> String{
         return words.joined(separator: " ").camelized
     }
-    
-    
-    static let specialWords = ["equals": "=",
-                               "booleanEquals": "=",
-                               "plus": "+",
-                               "minus": "-",
-                               "divide": "/",
-                               "open parenthesis": "(",
-                               "close parenthiesis": ")",
-                               "and": "&&",
-                               "or": "||",
-                               "one": "1",
-                               "two": "2",
-                               "three": "3",
-                               "four": "4",
-                               "five": "5",
-                               "six": "6",
-                               "seven": "7",
-                               "eight": "8",
-                               "nine": "9",
-                               "ten": "10",
-                               
-                               ]
 
     static func scanPhrase(inputPhrase: [String], isCondition: Bool) -> [String]{
         print("IN SCAN");
@@ -206,6 +207,10 @@ class SpeechProcessor {
             if(phrase[i] == "equals" && isCondition){
                 phrase[i] = "==";
             }else{
+                if((phrase[i] == "greater" || phrase[i] == "less") && phrase[i + 1] == "than"){
+                    phrase[i] = specialWords[phrase[i]]!;
+                    phrase[i+1] = "";
+                }
                 let hasVal = specialWords[phrase[i]] != nil
                 if(hasVal){
                     phrase[i] = specialWords[phrase[i]]!;
