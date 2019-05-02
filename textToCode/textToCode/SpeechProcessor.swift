@@ -196,8 +196,13 @@ class SpeechProcessor {
     }
     
     static func findIndexOf(targetWord: String, phrase: [String]) -> Int{
+<<<<<<< HEAD
         if let index = phrase.firstIndex(of: targetWord){
             return index
+=======
+        if let indexOfA = phrase.firstIndex(of: targetWord){
+            return indexOfA
+>>>>>>> e91fe1205ec1518c7861694287d14ef95cccaf38
         }else{
             return -1;
         }
@@ -210,7 +215,12 @@ class SpeechProcessor {
         var removeWords: [Int] = [];
         var inQuote = false;
         for i in 0..<phrase.count{
+<<<<<<< HEAD
             if(phrase[i].contains("\"")){
+=======
+            if(phrase[i] == "\""){
+                phrase[i] = "\"";
+>>>>>>> e91fe1205ec1518c7861694287d14ef95cccaf38
                 inQuote = !inQuote;
                 print("IN QUotE")
             }else{

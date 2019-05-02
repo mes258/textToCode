@@ -149,11 +149,10 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             print("line 148");
             var isFinal = false;
             if result != nil {
-                //print("new segments!");
-                //print("first segment = \(firstSegment)");
                 print("Current input::: \(String(describing: result?.bestTranscription.formattedString))");
-                //Check for "new line"
+                //Check for input division
                 if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("stop"))! && firstSegment < (result?.bestTranscription.segments.count)!){
+
                     if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 2].substring.lowercased().contains("stop"))!){
                         self.audioEngine.stop()
                         self.recognitionRequest?.endAudio()
@@ -171,6 +170,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                         
                         //parse the new segments
                         self.textOutput.text = self.parseInput(resultArr: newSegments);
+                        self.textOutput.sizeToFit()
                         
                         //update first segment:
                         firstSegment = (result?.bestTranscription.segments.count)!;
