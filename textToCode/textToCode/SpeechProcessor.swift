@@ -179,6 +179,13 @@ class SpeechProcessor {
                 break;
             }
                 
+            if(resultArr[wordIndex] ~= "go" && resultArr[wordIndex + 1] ~= "to" ){
+                let name: String = wordListToCamelCase(scanPhrase(inputPhrase: Array(resultArr[wordIndex + 2..<resultArr.count]), isCondition: true));
+                print(name);
+                state.goto(name: String);
+                break;
+            }
+                
             else{
                 let line: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: false).joined(separator: " ");
                 let lineOfCode: JavaCode = JavaCode.init(exp: line)
@@ -196,13 +203,8 @@ class SpeechProcessor {
     }
     
     static func findIndexOf(targetWord: String, phrase: [String]) -> Int{
-<<<<<<< HEAD
         if let index = phrase.firstIndex(of: targetWord){
             return index
-=======
-        if let indexOfA = phrase.firstIndex(of: targetWord){
-            return indexOfA
->>>>>>> e91fe1205ec1518c7861694287d14ef95cccaf38
         }else{
             return -1;
         }
@@ -215,12 +217,7 @@ class SpeechProcessor {
         var removeWords: [Int] = [];
         var inQuote = false;
         for i in 0..<phrase.count{
-<<<<<<< HEAD
             if(phrase[i].contains("\"")){
-=======
-            if(phrase[i] == "\""){
-                phrase[i] = "\"";
->>>>>>> e91fe1205ec1518c7861694287d14ef95cccaf38
                 inQuote = !inQuote;
                 print("IN QUotE")
             }else{
