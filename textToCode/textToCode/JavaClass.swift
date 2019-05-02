@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ItemVisability: String{
     case publicItem =  "public"
@@ -60,6 +61,19 @@ class JavaClass{
         }
         outputStr += "}";
         return outputStr;
+    }
+    
+    func toFormattedString() -> NSMutableAttributedString{
+        var output = NSMutableAttributedString()
+        for xmethod in methods{
+            output.append(xmethod.toFormattedString)
+        }
+        if let xclass = SpeechProcessor.state.currentClass{
+            if xclass.name == self.name && SpeechProcessor.state.currentMethod == nil{
+                var outputString = NSMutableAttributedString(string: self.toString(), attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 0.7, green: 0.0, blue: 1.0, alpha: 1.0)] as [NSAttributedString.Key: Any]);
+            }
+        }
+        return output
     }
     
 }
