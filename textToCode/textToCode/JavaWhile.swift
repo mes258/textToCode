@@ -27,6 +27,7 @@ class JavaWhile: JavaExpression{
         for expression in expressions{
             outputString += INDENT;
             outputString += expression.toString();
+            outputString += "\n"
         }
         outputString += "    } \n"
         return outputString;
