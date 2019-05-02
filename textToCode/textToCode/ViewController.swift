@@ -63,14 +63,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         sendInput(input: "New public method hello returns string stop");
         sendInput(input: "return \"hello how are you\" stop");
         sendInput(input: "new public method count legs returns integer stop");
-       // sendInput(input: "new private variable integer number of legs equals seven plus five stop");
+        sendInput(input: "new private variable integer number of legs equals seven plus five stop");
         sendInput(input: "while number of legs greater than 4 stop");
         sendInput(input: "number of legs plus plus stop");
         
         
         sendInput(input: "print number of legs stop");
-        
-        
         
         
     }

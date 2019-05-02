@@ -41,8 +41,12 @@ class JavaMethod{
         if(inStructure){
             expressions[expressions.count - 1].addExpression(exp: exp);
         }else{
-            expressions.append(exp);
-            inStructure = true;
+            if(exp is JavaExpVariables || exp is JavaPrint || exp is JavaCode){
+                expressions.append(exp);
+            }else{
+                expressions.append(exp);
+                inStructure = true;
+            }
         }
     }
     
