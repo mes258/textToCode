@@ -30,7 +30,7 @@ class JavaMethod{
     func getVariables()->[JavaExpVariables]{
         var currentVars: [JavaExpVariables] = [];
         for exp in expressions{
-            if let isVar = exp as? JavaExpVariables{
+            if exp is JavaExpVariables{
                 currentVars.append(exp as! JavaExpVariables);
             }
         }

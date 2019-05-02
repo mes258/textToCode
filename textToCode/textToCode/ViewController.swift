@@ -18,7 +18,7 @@ extension String {
 }
 
 class ViewController: UIViewController, SFSpeechRecognizerDelegate {
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+    private var speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -30,7 +30,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        testInput();
+        //testInput();
         recordButton.isEnabled = false
         speechRecognizer!.delegate = self
         SFSpeechRecognizer.requestAuthorization { (authStatus) in
@@ -111,6 +111,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             recordButton.isEnabled = true
             recordButton.setTitle("Start Recording", for: .normal)
         } else {
+          
+            print("AUDIO ENGINE IS STARTED!!!");
+            
             startRecording()
             recordButton.setTitle("Stop Recording", for: .normal)
         }
@@ -131,22 +134,26 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         let inputNode : AVAudioInputNode = audioEngine.inputNode
-        
+
         guard let recognitionRequest = recognitionRequest else {
             fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
         }
         
+        print("Line 144!!!");
         /* SHOW THE LIVE RESULTS */
         recognitionRequest.shouldReportPartialResults = true
         var firstSegment = 0;
+        speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+        recognitionRequest.taskHint = .search;
         recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
-            //var isFinal = false
+            print("line 148");
+            var isFinal = false;
             if result != nil {
                 //print("new segments!");
                 //print("first segment = \(firstSegment)");
                 print("Current input::: \(String(describing: result?.bestTranscription.formattedString))");
                 //Check for "new line"
-                if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("stop"))!){
+                if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("stop"))! && firstSegment < (result?.bestTranscription.segments.count)!){
                     if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 2].substring.lowercased().contains("stop"))!){
                         self.audioEngine.stop()
                         self.recognitionRequest?.endAudio()
@@ -171,10 +178,10 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                     
                 }
                 
-                //isFinal = (result?.isFinal)!
+                isFinal = (result?.isFinal)!
             }
             
-            if error != nil {
+            if error != nil || isFinal {
                 self.audioEngine.stop()
                 inputNode.removeTap(onBus: 0)
                 self.recognitionRequest = nil
@@ -195,7 +202,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         } catch {
             print("audioEngine couldn't start because of an error.")
         }
-        textOutput.text = "Say something, I'm listening!"
+        //textOutput.text = "Say something, I'm listening!"
         
     }
     
@@ -213,7 +220,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 //resultStr += newString;
             }
         }
-        
         return SpeechProcessor.processInput(result: resultStr);
     }
     
