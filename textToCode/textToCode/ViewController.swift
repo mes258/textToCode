@@ -53,6 +53,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             }
         }
         
+        textOutput.contentSize = CGSize(width: 900, height: self.view.frame.size.height)
+        
     }
     
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
@@ -89,9 +91,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             print("audioSession properties weren't set because of an error.")
         }
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        guard let inputNode:AVAudioInputNode? = audioEngine.inputNode else {
-            fatalError("Audio engine has no input node")
-        }
+        let inputNode : AVAudioInputNode = audioEngine.inputNode
         
         guard let recognitionRequest = recognitionRequest else {
             fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
@@ -100,13 +100,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         /* SHOW THE LIVE RESULTS */
         recognitionRequest.shouldReportPartialResults = true
         var firstSegment = 0;
-        var numOfStops = 0;
         recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
             //var isFinal = false
             if result != nil {
                 //print("new segments!");
                 //print("first segment = \(firstSegment)");
-                print("Current input::: \(result?.bestTranscription.formattedString)");
+                print("Current input::: \(String(describing: result?.bestTranscription.formattedString))");
                 //Check for "new line"
                 if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("stop"))!){
                     if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 2].substring.lowercased().contains("stop"))!){
@@ -115,11 +114,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                         self.recordButton.isEnabled = true
                         self.recordButton.setTitle("Start Recording", for: .normal)
                     }else{
-                        print(result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring)
+                        print(result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring ?? "")
                         
                         //Only pasrse the new segments
                         let allSegments: [SFTranscriptionSegment] = (result?.bestTranscription.segments)!;
-                        var newSegments = Array(allSegments.suffix(from: firstSegment));
+                        let newSegments = Array(allSegments.suffix(from: firstSegment));
                         
                         //the raw input
                         self.bestTranscriptionOutput.text = result?.bestTranscription.formattedString;
@@ -138,15 +137,15 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             
             if error != nil {
                 self.audioEngine.stop()
-                inputNode!.removeTap(onBus: 0)
+                inputNode.removeTap(onBus: 0)
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
                 self.recordButton.isEnabled = true
             }
         })
         
-        let recordingFormat = inputNode!.outputFormat(forBus: 0)
-        inputNode!.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
             self.recognitionRequest?.append(buffer)
         }
         
