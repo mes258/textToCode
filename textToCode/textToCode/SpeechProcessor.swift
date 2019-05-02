@@ -28,7 +28,7 @@ class SpeechProcessor {
                                "four": "4",
                                "five": "5",
                                "six": "6",
-                               "seven": "7",
+                               "seven.": "7",
                                "eight": "8",
                                "nine": "9",
                                "ten": "10",
@@ -55,7 +55,7 @@ class SpeechProcessor {
                 return hello how are you stop
              new public method count legs returns integer stop
                 new private variable integer i equals seven stop
-                while i is less than 4 stop
+                while i less than 4 stop
                     i plus plus stop
                     print i stop
                 if i equals 4 stop
@@ -92,15 +92,15 @@ class SpeechProcessor {
                 print("In new class");
                 state.addClass(newClass: JavaClass.init(className: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])).uppercasingFirst, vis: resultArr[wordIndex + 1]));
                 
-                var tempArray = ["newVar", "equals", "true"];
-                scanPhrase(inputPhrase: tempArray, isCondition: false);
-                scanPhrase(inputPhrase: tempArray, isCondition: true);
-                tempArray = ["secondVar", "plus", "plus"];
-                scanPhrase(inputPhrase: tempArray, isCondition: false);
-                scanPhrase(inputPhrase: tempArray, isCondition: true);
-                tempArray = ["secondVar", "equals", "seven", "and", "thridVar", "divide", "three", "equals", "four"];
-                scanPhrase(inputPhrase: tempArray, isCondition: false);
-                scanPhrase(inputPhrase: tempArray, isCondition: true);
+//                var tempArray = ["newVar", "equals", "true"];
+//                scanPhrase(inputPhrase: tempArray, isCondition: false);
+//                scanPhrase(inputPhrase: tempArray, isCondition: true);
+//                tempArray = ["secondVar", "plus", "plus"];
+//                scanPhrase(inputPhrase: tempArray, isCondition: false);
+//                scanPhrase(inputPhrase: tempArray, isCondition: true);
+//                tempArray = ["secondVar", "equals", "seven", "and", "thridVar", "divide", "three", "equals", "four"];
+//                scanPhrase(inputPhrase: tempArray, isCondition: false);
+//                scanPhrase(inputPhrase: tempArray, isCondition: true);
             }
             
             //NEW METHOD: eg: "new public method kick returns boolean stop"
@@ -135,7 +135,7 @@ class SpeechProcessor {
             
             //while bye equals true stop
             //WHILE: eg: while bye equals true stop
-            if(resultArr[wordIndex] ~= "while"){
+            if(resultArr[wordIndex].first ~= "w"){
                 print("In new while");
                 let condition: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
                 let newWhile: JavaWhile = JavaWhile.init(condition: condition)
@@ -146,7 +146,7 @@ class SpeechProcessor {
             
             //return bye stop
             //RETURN: eg: return bye stop
-            if(resultArr[wordIndex] ~= "return"){
+            if(resultArr[wordIndex].first ~= "r"){
                 let returnVal: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
                 let newReturn: JavaReturn = JavaReturn.init(returnString: returnVal);
                 state.currentMethod?.addExpression(exp: newReturn);
@@ -160,7 +160,7 @@ class SpeechProcessor {
             
             //IF: eg: see above^
             
-            if(resultArr[wordIndex] ~= "if"){
+            if(resultArr[wordIndex].first ~= "i"){
                 let condition: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
                 let newIf: JavaIf = JavaIf.init(condition: condition);
                 state.currentMethod?.addExpression(exp: newIf);
@@ -203,21 +203,30 @@ class SpeechProcessor {
         print("IN SCAN");
         print(inputPhrase);
         var phrase = inputPhrase;
+        var removeWords: [Int] = [];
         for var i in 0..<phrase.count{
             if(phrase[i] == "equals" && isCondition){
                 phrase[i] = "==";
             }else{
                 if((phrase[i] == "greater" || phrase[i] == "less") && phrase[i + 1] == "than"){
                     phrase[i] = specialWords[phrase[i]]!;
-                    phrase[i+1] = "";
+                    removeWords.append(i + 1);
+                }else{
+                    let hasVal = specialWords[phrase[i]] != nil
+                    if(hasVal){
+                        phrase[i] = specialWords[phrase[i]]!;
+                    }
                 }
-                let hasVal = specialWords[phrase[i]] != nil
-                if(hasVal){
-                    phrase[i] = specialWords[phrase[i]]!;
-                }
+                
             }
 
         }
+        
+        removeWords = removeWords.reversed();
+        for num in removeWords{
+            phrase.remove(at: num);
+        }
+        
         print(phrase);
         return phrase;
     }
