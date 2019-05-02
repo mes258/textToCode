@@ -28,7 +28,7 @@ class SpeechProcessor {
                                "four": "4",
                                "five": "5",
                                "six": "6",
-                               "seven.": "7",
+                               "seven": "7",
                                "eight": "8",
                                "nine": "9",
                                "ten": "10",
@@ -37,7 +37,6 @@ class SpeechProcessor {
     
     static func processInput(result: String) -> String{
     
-        
         let lowerCaseResult: String = result.lowercased();
         let resultArr1 = lowerCaseResult.components(separatedBy: " ");
         print(resultArr1);
@@ -110,7 +109,7 @@ class SpeechProcessor {
                         print("in new method var");
                         let equalsInt = findIndexOf(targetWord: "equals", phrase: Array(resultArr[wordIndex..<resultArr.count]))
                         
-                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 4..<equalsInt - 1])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
+                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 4..<equalsInt])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
                         state.currentMethod?.addExpression(exp: newVar);
                     }else{
                         //NEW CLASS VAR: eg: "new private variable String leg"
@@ -206,14 +205,14 @@ class SpeechProcessor {
 
     static func scanPhrase(inputPhrase: [String], isCondition: Bool) -> [String]{
         print("IN SCAN");
-        print(inputPhrase);
+        //print(inputPhrase);
         var phrase = inputPhrase;
         var removeWords: [Int] = [];
         var inQuote = false;
         for var i in 0..<phrase.count{
-            if(phrase[i] == "\""){
-                phrase[i] = "\"";
+            if(phrase[i].contains("\"")){
                 inQuote = !inQuote;
+                print("IN QUotE")
             }else{
                 if(!inQuote){
                     if(phrase[i] == "equals" && isCondition){
@@ -237,10 +236,7 @@ class SpeechProcessor {
         for num in removeWords{
             phrase.remove(at: num);
         }
-        
-        if(inQuote){
-            phrase.append("\"");
-        }
+    
         
         print(phrase);
         return phrase;

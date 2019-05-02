@@ -30,6 +30,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        testInput();
         recordButton.isEnabled = false
         speechRecognizer!.delegate = self
         SFSpeechRecognizer.requestAuthorization { (authStatus) in
@@ -57,6 +58,46 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
     }
     
+    public func testInput(){
+        sendInput(input: "New private class dog stop");
+        sendInput(input: "New public method hello returns string stop");
+        sendInput(input: "return \"hello how are you\" stop");
+        sendInput(input: "new public method count legs returns integer stop");
+       // sendInput(input: "new private variable integer number of legs equals seven plus five stop");
+        sendInput(input: "while number of legs greater than 4 stop");
+        sendInput(input: "number of legs plus plus stop");
+        
+        
+        sendInput(input: "print number of legs stop");
+        
+        
+        
+        
+    }
+    
+    private func sendInput(input: String){
+        self.textOutput.text = SpeechProcessor.processInput(result: input);
+    }
+    
+    /*
+     new private class dog stop
+     new private method hello returns string stop
+     return hello how are you stop
+     new public method count legs returns integer stop
+     new private variable integer i equals seven plus five stop
+     while i less than 4 stop
+     i plus plus stop
+     print i stop
+     if i equals 4 stop
+     i equals two stop
+     print i stop
+     else if i equals 5 stop
+     i minus minus stop
+     print i stop
+     else
+     print i stop
+     return i plus 5 stop
+ */
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
             recordButton.isEnabled = true
