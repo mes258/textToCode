@@ -54,8 +54,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             }
         }
         
-        textOutput.contentSize = CGSize(width: 900, height: self.view.frame.size.height)
-        
     }
     
     public func testInput(){
@@ -170,7 +168,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                         
                         //parse the new segments
                         self.textOutput.text = self.parseInput(resultArr: newSegments);
-                        self.textOutput.sizeToFit()
                         
                         //update first segment:
                         firstSegment = (result?.bestTranscription.segments.count)!;
@@ -202,7 +199,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         } catch {
             print("audioEngine couldn't start because of an error.")
         }
-        //textOutput.text = "Say something, I'm listening!"
         
     }
     
