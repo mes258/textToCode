@@ -15,7 +15,7 @@ class SpeechProcessor {
     
         
         let lowerCaseResult: String = result.lowercased();
-        var resultArr1 = lowerCaseResult.components(separatedBy: " ");
+        let resultArr1 = lowerCaseResult.components(separatedBy: " ");
         print(resultArr1);
 
         var resultArr = resultArr1.prefix(resultArr1.count - 1);
@@ -58,7 +58,7 @@ class SpeechProcessor {
             //NEW METHOD: eg: "new public method kick returns boolean stop"
             if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "m"){
                 print("In new method");
-                state.currentClass?.addMethod(methodName: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count - 2])).uppercasingFirst, vis: resultArr[wordIndex + 1], returnType: resultArr[wordIndex + 5]);
+                state.currentClass?.addMethod(methodName: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count - 2])), vis: resultArr[wordIndex + 1], returnType: resultArr[resultArr.count - 1]);
                 state.currentMethod = state.currentClass?.methods[(state.currentClass?.methods.count)! - 1];
                 break;
             }
