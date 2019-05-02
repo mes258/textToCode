@@ -40,7 +40,7 @@ class JavaClass{
     
     func findMethod(_ methodName: String) -> JavaMethod?{
         return methods.first(where: { (m:JavaMethod) -> Bool in
-            return m.getName() == methodName
+             return m.getName() == methodName
         })
     }
     

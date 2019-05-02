@@ -39,12 +39,7 @@ class SpeechProcessor {
     
         let lowerCaseResult: String = result.lowercased();
         let resultArr1 = lowerCaseResult.components(separatedBy: " ");
-        print(resultArr1);
-
         var resultArr = resultArr1.prefix(resultArr1.count - 1);
-        
-        print(resultArr);
-        
         /* SCRIPT::
          big test phrase:
          
@@ -182,7 +177,7 @@ class SpeechProcessor {
             if(resultArr[wordIndex] ~= "go" && resultArr[wordIndex + 1] ~= "to" ){
                 let name: String = wordListToCamelCase(scanPhrase(inputPhrase: Array(resultArr[wordIndex + 2..<resultArr.count]), isCondition: true));
                 print(name);
-                state.goto(name: String);
+                state.goto(name);
                 break;
             }
                 
@@ -211,7 +206,6 @@ class SpeechProcessor {
     }
 
     static func scanPhrase(inputPhrase: [String], isCondition: Bool) -> [String]{
-        print("IN SCAN");
         //print(inputPhrase);
         var phrase = inputPhrase;
         var removeWords: [Int] = [];
@@ -219,7 +213,6 @@ class SpeechProcessor {
         for i in 0..<phrase.count{
             if(phrase[i].contains("\"")){
                 inQuote = !inQuote;
-                print("IN QUotE")
             }else{
                 if(!inQuote){
                     if(phrase[i] == "equals" && isCondition){
@@ -243,9 +236,6 @@ class SpeechProcessor {
         for num in removeWords{
             phrase.remove(at: num);
         }
-    
-        
-        print(phrase);
         return phrase;
     }
     
