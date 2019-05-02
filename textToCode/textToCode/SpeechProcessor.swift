@@ -179,6 +179,13 @@ class SpeechProcessor {
                 break;
             }
                 
+            if(resultArr[wordIndex] ~= "go" && resultArr[wordIndex + 1] ~= "to" ){
+                let name: String = wordListToCamelCase(scanPhrase(inputPhrase: Array(resultArr[wordIndex + 2..<resultArr.count]), isCondition: true));
+                print(name);
+                state.goto(name: String);
+                break;
+            }
+                
             else{
                 let line: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: false).joined(separator: " ");
                 let lineOfCode: JavaCode = JavaCode.init(exp: line)
