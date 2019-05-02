@@ -111,10 +111,10 @@ class SpeechProcessor {
 //            bye equals true stop
             
             //IF: eg: see above^
-            var newIf: JavaIf = JavaIf.init(condition: "");
+            
             if(resultArr[wordIndex] ~= "if"){
                 let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
-                newIf = JavaIf.init(condition: condition);
+                let newIf: JavaIf = JavaIf.init(condition: condition);
                 state.currentMethod?.addExpression(exp: newIf);
                 break;
             }
@@ -122,16 +122,16 @@ class SpeechProcessor {
             //else
             if(resultArr[wordIndex] ~= "else" && resultArr.count == 1){
 //                let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
-                newIf.addElse();
-                //state.currentMethod?.addExpression(exp: newIf);
+                let newElse: JavaElse = JavaElse.init();
+                state.currentMethod?.addExpression(exp: newElse);
                 break;
             }
             
             //ELSE IF:
             if(resultArr[wordIndex] ~= "else" && resultArr[wordIndex + 1] ~= "if"){
                 let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
-                newIf.addElseIf(condition: condition);
-                //state.currentMethod?.addExpression(exp: newIf);
+                let newElseIf: JavaElseIf = JavaElseIf.init(condition: condition);
+                state.currentMethod?.addExpression(exp: newElseIf);
                 break;
             }
             
