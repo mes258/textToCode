@@ -68,9 +68,6 @@ class SpeechProcessor {
                     print i stop
                     return i plus 5 stop
          
-         
-         
-         
          //Other test phrases:
          
          new public variable boolean bye stop
@@ -91,16 +88,6 @@ class SpeechProcessor {
             if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "c"){
                 print("In new class");
                 state.addClass(newClass: JavaClass.init(className: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])).uppercasingFirst, vis: resultArr[wordIndex + 1]));
-                
-//                var tempArray = ["newVar", "equals", "true"];
-//                scanPhrase(inputPhrase: tempArray, isCondition: false);
-//                scanPhrase(inputPhrase: tempArray, isCondition: true);
-//                tempArray = ["secondVar", "plus", "plus"];
-//                scanPhrase(inputPhrase: tempArray, isCondition: false);
-//                scanPhrase(inputPhrase: tempArray, isCondition: true);
-//                tempArray = ["secondVar", "equals", "seven", "and", "thridVar", "divide", "three", "equals", "four"];
-//                scanPhrase(inputPhrase: tempArray, isCondition: false);
-//                scanPhrase(inputPhrase: tempArray, isCondition: true);
             }
             
             //NEW METHOD: eg: "new public method kick returns boolean stop"
@@ -182,7 +169,15 @@ class SpeechProcessor {
                 state.currentMethod?.addExpression(exp: newElseIf);
                 break;
             }
-            
+                
+            //PRINT:
+            if(resultArr[wordIndex] ~= "print"){
+                let printStatement: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
+                let newPrint: JavaPrint = JavaPrint.init(printStmt: printStatement);
+                state.currentMethod?.addExpression(exp: newPrint);
+                break;
+            }
+                
             else{
                 let line: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: false).joined(separator: " ");
                 let lineOfCode: JavaCode = JavaCode.init(exp: line)
