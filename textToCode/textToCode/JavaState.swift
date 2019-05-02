@@ -99,4 +99,12 @@ class JavaState{
         }
         return output
     }
+    
+    func toFormattingString() -> NSMutableAttributedString{
+        let output = NSMutableAttributedString()
+        for xclass in classes{
+            output.append(xclass.toFormattedString())
+        }
+        return output
+    }
 }

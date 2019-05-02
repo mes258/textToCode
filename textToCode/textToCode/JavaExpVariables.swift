@@ -28,9 +28,9 @@ class JavaExpVariables: JavaExpression{
     
     override func toString() -> String{
         if value == nil{
-            return "\(visability.rawValue) \(type) \(name);"
+            return "    \(visability.rawValue) \(type) \(name);"
         }else{
-            return "\(visability.rawValue) \(type) \(name) = \(value ?? "you should never see this");"
+            return "    \(visability.rawValue) \(type) \(name) = \(value ?? "you should never see this");"
         }
     }
 }

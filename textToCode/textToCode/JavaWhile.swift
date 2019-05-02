@@ -23,13 +23,14 @@ class JavaWhile: JavaExpression{
     
     override func toString() -> String{
         var outputString = "";
-        outputString += "while(\(self.condition)){ \n"
+        outputString += "    while(\(self.condition)){ \n"
         for expression in expressions{
+            outputString += INDENT;
             outputString += INDENT;
             outputString += expression.toString();
             outputString += "\n"
         }
-        outputString += "    } \n"
+        outputString += "        } \n"
         return outputString;
     }
 }
