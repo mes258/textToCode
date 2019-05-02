@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class JavaMethod{
     private var INDENT = "    ";
@@ -50,7 +51,8 @@ class JavaMethod{
         }
     }
     
-    func toString() -> String{
+    func toFormattedString() -> NSMutableAttributedString{
+       // var outputString = NSMutableAttributedString(string: "\(visability.rawValue) \(returnType) \(name)(){ \n", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)] as [NSAttributedString.Key: Any]);
         var outputStr: String = "";
         outputStr += "\(visability.rawValue) \(returnType) \(name)(){ \n"
         for expression in expressions{
@@ -59,8 +61,24 @@ class JavaMethod{
         }
         outputStr += "}";
         
-        print(outputStr);
-        return outputStr;
+        let outputString = NSMutableAttributedString(string: outputStr, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)] as [NSAttributedString.Key: Any]);
+        return outputString;
+    }
+    
+    func toString() -> NSMutableAttributedString{
+        if(SpeechProcessor.state.currentMethod?.getName() == self.getName()){
+            return toFormattedString();
+        }
+        var outputStr: String = "";
+        outputStr += "\(visability.rawValue) \(returnType) \(name)(){ \n"
+        for expression in expressions{
+            outputStr += INDENT;
+            outputStr += "\(expression.toString()) \n";
+        }
+        outputStr += "}";
+        
+        let formattedOutput = NSMutableAttributedString(string: outputStr);
+        return formattedOutput;
     }
     
     func getName() -> String{
