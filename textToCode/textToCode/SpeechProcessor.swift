@@ -54,7 +54,7 @@ class SpeechProcessor {
              new private method hello returns string stop
                 return hello how are you stop
              new public method count legs returns integer stop
-                new private variable integer i equals seven stop
+                new private variable integer i equals seven plus five stop
                 while i less than 4 stop
                     i plus plus stop
                     print i stop
@@ -108,7 +108,9 @@ class SpeechProcessor {
                     if(resultArr.contains("equals")){
                         //NEW METHOD VAR: eg: "new private variable int size equals seven"
                         print("in new method var");
-                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 4..<resultArr.count - 2])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3], value: resultArr[resultArr.count - 1]);
+                        let equalsInt = findIndexOf(targetWord: "equals", phrase: Array(resultArr[wordIndex..<resultArr.count]))
+                        
+                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 4..<equalsInt - 1])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
                         state.currentMethod?.addExpression(exp: newVar);
                     }else{
                         //NEW CLASS VAR: eg: "new private variable String leg"
@@ -192,6 +194,14 @@ class SpeechProcessor {
     
     static func wordListToCamelCase(_ words: [String]) -> String{
         return words.joined(separator: " ").camelized
+    }
+    
+    static func findIndexOf(targetWord: String, phrase: [String]) -> Int{
+        if var indexOfA = phrase.firstIndex(of: targetWord){
+            return indexOfA
+        }else{
+            return -1;
+        }
     }
 
     static func scanPhrase(inputPhrase: [String], isCondition: Bool) -> [String]{
