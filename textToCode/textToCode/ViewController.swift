@@ -30,7 +30,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        testInput();
+        //testInput();
         recordButton.isEnabled = false
         speechRecognizer!.delegate = self
         SFSpeechRecognizer.requestAuthorization { (authStatus) in
@@ -111,9 +111,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             recordButton.isEnabled = true
             recordButton.setTitle("Start Recording", for: .normal)
         } else {
-          
-            print("AUDIO ENGINE IS STARTED!!!");
-            
             startRecording()
             recordButton.setTitle("Stop Recording", for: .normal)
         }
@@ -138,18 +135,15 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         guard let recognitionRequest = recognitionRequest else {
             fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
         }
-        
-        print("Line 144!!!");
         /* SHOW THE LIVE RESULTS */
         recognitionRequest.shouldReportPartialResults = true
         var firstSegment = 0;
         speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
         recognitionRequest.taskHint = .search;
         recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
-            print("line 148");
             var isFinal = false;
             if result != nil {
-                print("Current input::: \(String(describing: result?.bestTranscription.formattedString))");
+                //print("Current input::: \(String(describing: result?.bestTranscription.formattedString))");
                 //Check for input division
                 if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("stop"))! && firstSegment < (result?.bestTranscription.segments.count)!){
 
@@ -159,7 +153,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                         self.recordButton.isEnabled = true
                         self.recordButton.setTitle("Start Recording", for: .normal)
                     }else{
-                        print(result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring ?? "")
                         
                         //Only pasrse the new segments
                         let allSegments: [SFTranscriptionSegment] = (result?.bestTranscription.segments)!;
