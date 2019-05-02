@@ -50,8 +50,10 @@ class JavaState{
         })
     }
     
-    func goto(_ className: String){
-        if let xclass = findClass(className){
+    func goto(_ name: String){
+        if currentClass?.findMethod(name) != nil {
+            currentMethod = currentClass?.findMethod(name)
+        }else if let xclass = findClass(name.uppercasingFirst){
             currentClass = xclass;
         }
     }
