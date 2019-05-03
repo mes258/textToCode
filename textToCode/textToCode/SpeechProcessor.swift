@@ -42,7 +42,6 @@ class SpeechProcessor {
         let lowerCaseResult: String = result.lowercased();
         let resultArr1 = lowerCaseResult.components(separatedBy: " ");
         var resultArr = resultArr1.prefix(resultArr1.count - 1);
-        
         for wordIndex in 0..<resultArr.count{
             
             //NEW CLASS: eg: "new private class dog stop "
@@ -145,6 +144,14 @@ class SpeechProcessor {
                 state.currentMethod?.addExpression(exp: newPrint);
                 break;
             }
+            
+            //COMMENTS:
+            if(resultArr[wordIndex] ~= "comment"){
+                let commentStatement: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
+                let newComment: JavaComment = JavaComment.init(commentVal: commentStatement);
+                state.currentMethod?.addExpression(exp: newComment);
+                break;
+            }
                 
             if(resultArr[wordIndex] ~= "go" && resultArr[wordIndex + 1] ~= "to" ){
                 let name: String = wordListToCamelCase(scanPhrase(inputPhrase: Array(resultArr[wordIndex + 2..<resultArr.count]), isCondition: true));
@@ -152,7 +159,13 @@ class SpeechProcessor {
                 state.goto(name);
                 break;
             }
-                
+            
+//            //UNDO:
+//            if(resultArr[wordIndex] ~= "undo"){
+//                state = state.getPreviousState;
+//                break;
+//            }
+            
             if(resultArr[wordIndex] ~= "exit"){
                 state.currentMethod?.exitExpression();
                 break;

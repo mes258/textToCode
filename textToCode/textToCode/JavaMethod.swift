@@ -42,7 +42,7 @@ class JavaMethod{
         if(inStructure){
             expressions[expressions.count - 1].addExpression(exp: exp);
         }else{
-            if(exp is JavaExpVariables || exp is JavaPrint || exp is JavaCode){
+            if(exp is JavaExpVariables || exp is JavaPrint || exp is JavaCode || exp is JavaComment){
                 expressions.append(exp);
             }else{
                 expressions.append(exp);

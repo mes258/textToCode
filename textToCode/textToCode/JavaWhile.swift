@@ -17,6 +17,10 @@ class JavaWhile: JavaExpression{
         self.condition = condition;
     }
     
+    func getExpressions()-> [JavaExpression]{
+        return self.expressions;
+    }
+    
     override func addExpression(exp: JavaExpression){
         expressions.append(exp);
     }
@@ -32,5 +36,13 @@ class JavaWhile: JavaExpression{
         outputString += INDENT + INDENT;
         outputString += "} \n"
         return outputString;
+    }
+    
+    override func copy() -> JavaWhile {
+        let whileCopy = JavaWhile.init(condition: self.condition);
+        for expression in self.getExpressions(){
+            whileCopy.addExpression(exp: expression.copy());
+        }
+        return whileCopy;
     }
 }

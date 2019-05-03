@@ -16,6 +16,10 @@ class JavaElse: JavaExpression{
     override init() {
     }
     
+    func getExpressions()-> [JavaExpression]{
+        return self.expressions;
+    }
+    
     override func addExpression(exp: JavaExpression){
         expressions.append(exp);
     }
@@ -31,5 +35,13 @@ class JavaElse: JavaExpression{
         outputString += INDENT;
         outputString += "} \n"
         return outputString;
+    }
+    
+    override func copy() -> JavaElse {
+        let elseCopy = JavaElse.init();
+        for expression in self.getExpressions(){
+            elseCopy.addExpression(exp: expression.copy());
+        }
+        return elseCopy;
     }
 }

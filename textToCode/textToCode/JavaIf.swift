@@ -17,6 +17,10 @@ class JavaIf: JavaExpression{
         self.condition = condition;
     }
     
+    func getExpressions()-> [JavaExpression]{
+        return self.expressions;
+    }
+    
     override func addExpression(exp: JavaExpression){
         expressions.append(exp);
     }
@@ -31,5 +35,13 @@ class JavaIf: JavaExpression{
         outputString += INDENT;
         outputString += "} \n"
         return outputString;
+    }
+    
+    override func copy() -> JavaIf {
+        let ifCopy = JavaIf.init(condition: self.condition);
+        for expression in self.getExpressions(){
+            ifCopy.addExpression(exp: expression.copy());
+        }
+        return ifCopy;
     }
 }

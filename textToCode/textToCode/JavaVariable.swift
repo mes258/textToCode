@@ -19,12 +19,25 @@ class JavaVariable{
         self.type = type;
     }
     
+    func getName() -> String{
+        return self.name;
+    }
+    
+    func getVis() -> ItemVisability{
+        return self.visability;
+    }
+    
     func getType() -> String{
         return self.type;
     }
     
     func toString() -> String{
         return "\(visability.rawValue) \(type) \(name);"
+    }
+    
+    func copy() -> JavaVariable{
+        let varCopy = JavaVariable.init(name: self.getName(), vis: self.getVis().rawValue, type: self.getType())
+        return varCopy;
     }
     
 }

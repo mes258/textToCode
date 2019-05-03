@@ -12,6 +12,7 @@
 		1E173644227B431E00B66AAF /* JavaElseIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E173643227B431E00B66AAF /* JavaElseIf.swift */; };
 		1E173646227B6A6300B66AAF /* JavaPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E173645227B6A6300B66AAF /* JavaPrint.swift */; };
 		1E173648227C6A5100B66AAF /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E173647227C6A5100B66AAF /* HelpViewController.swift */; };
+		1E17364A227C85E800B66AAF /* JavaComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E173649227C85E800B66AAF /* JavaComment.swift */; };
 		1E424A29226CD7FF00AFA493 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A28226CD7FF00AFA493 /* AppDelegate.swift */; };
 		1E424A2B226CD7FF00AFA493 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E424A2A226CD7FF00AFA493 /* ViewController.swift */; };
 		1E424A2E226CD7FF00AFA493 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E424A2C226CD7FF00AFA493 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		1E173643227B431E00B66AAF /* JavaElseIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaElseIf.swift; sourceTree = "<group>"; };
 		1E173645227B6A6300B66AAF /* JavaPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaPrint.swift; sourceTree = "<group>"; };
 		1E173647227C6A5100B66AAF /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		1E173649227C85E800B66AAF /* JavaComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaComment.swift; sourceTree = "<group>"; };
 		1E424A25226CD7FF00AFA493 /* textToCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = textToCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E424A28226CD7FF00AFA493 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E424A2A226CD7FF00AFA493 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				1E17363F227A39FB00B66AAF /* JavaCode.swift */,
 				1E9BA13B2278B0D0005BB417 /* JavaReturn.swift */,
 				1E173645227B6A6300B66AAF /* JavaPrint.swift */,
+				1E173649227C85E800B66AAF /* JavaComment.swift */,
 			);
 			path = textToCode;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				1E9BA13C2278B0D0005BB417 /* JavaReturn.swift in Sources */,
 				1E173648227C6A5100B66AAF /* HelpViewController.swift in Sources */,
 				BFE34F352270062800A046B0 /* Strings.swift in Sources */,
+				1E17364A227C85E800B66AAF /* JavaComment.swift in Sources */,
 				1E173646227B6A6300B66AAF /* JavaPrint.swift in Sources */,
 				1E9BA1302278A736005BB417 /* SpeechProcessor.swift in Sources */,
 				1E424A29226CD7FF00AFA493 /* AppDelegate.swift in Sources */,

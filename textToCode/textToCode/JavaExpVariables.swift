@@ -25,11 +25,24 @@ class JavaExpVariables: JavaExpression{
         return self.type;
     }
     
+    func getName() -> String{
+        return self.name;
+    }
+    
+    func getValue() -> String?{
+        return self.value;
+    }
+    
     override func toString() -> String{
         if value == nil{
             return "\(INDENT)\(type) \(name);"
         }else{
             return "\(INDENT)\(type) \(name) = \(value ?? "you should never see this");"
         }
+    }
+    
+    override func copy() -> JavaExpVariables {
+        let expVarCopy = JavaExpVariables.init(name: self.getName(), type: self.getType(), value: self.getValue())
+        return expVarCopy;
     }
 }

@@ -17,9 +17,17 @@ class JavaCode: JavaExpression{
         self.exp = exp;
     }
     
+    func getExp()-> String{
+        return self.exp;
+    }
+    
     override func toString() -> String{
         return "\(INDENT)\(self.exp);";
     }
     
+    override func copy() -> JavaCode {
+        let codeCopy = JavaCode.init(exp: self.getExp());
+        return codeCopy;
+    }
     
 }

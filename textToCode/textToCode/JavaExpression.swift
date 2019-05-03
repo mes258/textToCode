@@ -24,4 +24,8 @@ class JavaExpression{
     func toString() -> String{
         return "";
     }
+    
+    func copy() -> JavaExpression{
+        return JavaExpression.init();
+    }
 }

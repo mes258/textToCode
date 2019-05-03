@@ -18,6 +18,11 @@ class JavaElseIf: JavaExpression{
         self.condition = condition;
     }
     
+    func getExpressions()-> [JavaExpression]{
+        return self.expressions;
+    }
+    
+
     override func addExpression(exp: JavaExpression){
         expressions.append(exp);
     }
@@ -33,6 +38,14 @@ class JavaElseIf: JavaExpression{
         outputString += INDENT;
         outputString += "} \n"
         return outputString;
+    }
+    
+    override func copy() -> JavaElseIf {
+        let ifElseCopy = JavaElseIf.init(condition: self.condition)
+        for expression in self.getExpressions(){
+            ifElseCopy.addExpression(exp: expression.copy());
+        }
+        return ifElseCopy;
     }
     
 }
