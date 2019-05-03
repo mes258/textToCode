@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_5" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="textToCode" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Output text here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ijO-W5-OfQ">
-                                <rect key="frame" x="20" y="98" width="374" height="639"/>
+                                <rect key="frame" x="20" y="74" width="374" height="503"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" updatesFrequently="YES" allowsDirectInteraction="YES"/>
@@ -28,7 +28,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartQuotesType="no"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Best Transcription here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8z6-6C-Bnu">
-                                <rect key="frame" x="20" y="753" width="374" height="100"/>
+                                <rect key="frame" x="20" y="593" width="374" height="100"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Wej-y6-sce"/>
@@ -37,31 +37,28 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vcT-EK-v3K">
-                                <rect key="frame" x="182.66666666666666" y="859" width="49" height="30"/>
+                                <rect key="frame" x="182.66666666666666" y="699" width="49" height="30"/>
                                 <state key="normal" title="SHARE"/>
                                 <connections>
                                     <action selector="share:" destination="BYZ-38-t0r" eventType="touchUpInside" id="62H-BQ-CFc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xR-aT-o8z">
-                                <rect key="frame" x="182.66666666666666" y="52" width="49" height="30"/>
+                                <rect key="frame" x="182.66666666666666" y="28" width="49" height="30"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Record"/>
                                 <connections>
                                     <action selector="recordPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jlZ-vr-VSt"/>
                                 </connections>
                             </button>
-
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="55" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umQ-ya-di6">
-                                <rect key="frame" x="358" y="50" width="36" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umQ-ya-di6">
+                                <rect key="frame" x="373.66666666666669" y="37.666666666666664" width="20.333333333333314" height="20.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqh-YK-hDD">
-                                <rect key="frame" x="247.66666666666663" y="52" width="36" height="30"/>
+                                <rect key="frame" x="247.66666666666663" y="28" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RdL-Hz-ueb"/>
@@ -70,8 +67,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="umQ-ya-di6" secondAttribute="trailing" constant="20" id="1AY-Fh-96X"/>
                             <constraint firstItem="4xR-aT-o8z" firstAttribute="centerX" secondItem="ijO-W5-OfQ" secondAttribute="centerX" id="1An-66-vf8"/>
                             <constraint firstItem="vcT-EK-v3K" firstAttribute="top" secondItem="8z6-6C-Bnu" secondAttribute="bottom" constant="6" id="BoC-4J-Qbe"/>
+                            <constraint firstItem="ijO-W5-OfQ" firstAttribute="top" secondItem="umQ-ya-di6" secondAttribute="bottom" constant="16" id="EpK-pe-MGB"/>
                             <constraint firstAttribute="bottom" secondItem="8z6-6C-Bnu" secondAttribute="bottom" constant="43" id="GJY-kG-lIT"/>
                             <constraint firstItem="sqh-YK-hDD" firstAttribute="leading" secondItem="4xR-aT-o8z" secondAttribute="trailing" constant="16" id="KwW-kV-vpc"/>
                             <constraint firstItem="4xR-aT-o8z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Nm3-5r-znk"/>
