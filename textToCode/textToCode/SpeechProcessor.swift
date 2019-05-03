@@ -107,13 +107,13 @@ class SpeechProcessor {
                         print("in new method var");
                         let equalsInt = findIndexOf(targetWord: "equals", phrase: Array(resultArr[wordIndex..<resultArr.count]))
                         
-                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<equalsInt])), vis: "", type: resultArr[wordIndex + 2], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
+                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<equalsInt])), type: resultArr[wordIndex + 2], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
                         state.currentMethod?.addExpression(exp: newVar);
                         break;
                     }else{
                         //NEW method VAR: eg: "new variable String leg"
                         print("In new method var");
-                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])), vis: "", type: resultArr[wordIndex + 2], value: nil);
+                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])), type: resultArr[wordIndex + 2], value: nil);
                         state.currentMethod?.addExpression(exp: newVar);
                         break;
                     }
@@ -187,6 +187,11 @@ class SpeechProcessor {
                 
             if(resultArr[wordIndex] ~= "exit"){
                 state.currentMethod?.exitExpression();
+                break;
+            }
+                
+            if(resultArr[wordIndex] ~= "clear"){
+                SpeechProcessor.state = JavaState()
                 break;
             }
                 

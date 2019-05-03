@@ -12,13 +12,11 @@ import Foundation
 class JavaExpVariables: JavaExpression{
     private var INDENT = "\t";
     private var name: String;
-    private var visability: ItemVisability;
     private final var type: String;
     private var value: String?;
     
-    init(name: String, vis: String, type: String, value: String?) {
+    init(name: String, type: String, value: String?) {
         self.name = name;
-        self.visability = ItemVisability(rawValue: vis) ?? ItemVisability.defaultItem;
         self.type = type;
         self.value = value;
     }
