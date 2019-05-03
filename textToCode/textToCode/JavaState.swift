@@ -56,6 +56,7 @@ class JavaState{
             print("WENT TO METHOD \(currentMethod?.getName())")
         }else if let xclass = findClass(name.uppercasingFirst){
             currentClass = xclass;
+            currentMethod = Optional.none
             print("WENT TO CLASS \(currentClass?.name)")
         }
     }
