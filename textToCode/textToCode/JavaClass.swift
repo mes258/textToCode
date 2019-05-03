@@ -65,10 +65,10 @@ class JavaClass{
     
     func toFormattedString() -> NSMutableAttributedString{
         var output = NSMutableAttributedString()
-        var classHead = NSMutableAttributedString(string: "\(visability.rawValue) class \(name)(){ \n");
+        let classHead = NSMutableAttributedString(string: "\(visability.rawValue) class \(name)(){ \n");
         output.append(classHead);
         for classVar in classVariables{
-            var formattedVar = NSMutableAttributedString(string: "    \(classVar.toString()) \n");
+            let formattedVar = NSMutableAttributedString(string: "    \(classVar.toString()) \n");
             output.append(formattedVar)
         }
         for xmethod in methods{
@@ -76,6 +76,10 @@ class JavaClass{
 //            output.append(tab);
             output.append(xmethod.toFormattedString())
         }
+        
+        let classEnd = NSMutableAttributedString(string: "} \n ");
+        output.append(classEnd);
+        
         if let xclass = SpeechProcessor.state.currentClass{
             if xclass.name == self.name && SpeechProcessor.state.currentMethod == nil{
                 output = NSMutableAttributedString(string: self.toString());
@@ -83,8 +87,7 @@ class JavaClass{
                 output.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.init(red: 0.7, green: 0.0, blue: 1.0, alpha: 1.0)] as [NSAttributedString.Key: Any], range: NSRange(location: 0, length: self.toString().count));
             }
         }
-        var classEnd = NSMutableAttributedString(string: "} \n ");
-        output.append(classEnd);
+        
         return output
     }
     
