@@ -30,7 +30,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //testInput();
+        testInput();
         recordButton.isEnabled = false
         speechRecognizer!.delegate = self
         SFSpeechRecognizer.requestAuthorization { (authStatus) in
@@ -72,7 +72,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     private func sendInput(input: String){
-        self.textOutput.text = SpeechProcessor.processInput(result: input);
+        self.textOutput.attributedText = SpeechProcessor.processInput(result: input);
     }
     
     /*
@@ -160,7 +160,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                         self.bestTranscriptionOutput.text = result?.bestTranscription.formattedString;
                         
                         //parse the new segments
-                        self.textOutput.text = self.parseInput(resultArr: newSegments);
+                        self.textOutput.attributedText = self.parseInput(resultArr: newSegments);
                         
                         //update first segment:
                         firstSegment = (result?.bestTranscription.segments.count)!;
@@ -195,7 +195,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
     }
     
-    func parseInput(resultArr: [SFTranscriptionSegment]) -> String{
+    func parseInput(resultArr: [SFTranscriptionSegment]) -> NSMutableAttributedString{
         var resultStr: String = "";
         for seg in resultArr{
             //Need to remove /n characters

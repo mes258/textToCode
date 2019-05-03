@@ -35,7 +35,7 @@ class SpeechProcessor {
                                
                                ]
     
-    static func processInput(result: String) -> String{
+    static func processInput(result: String) -> NSMutableAttributedString{
     
         let lowerCaseResult: String = result.lowercased();
         let resultArr1 = lowerCaseResult.components(separatedBy: " ");
@@ -189,7 +189,7 @@ class SpeechProcessor {
             
         }
         
-        return state.toString();
+        return state.toFormattingString();
         
     }
     

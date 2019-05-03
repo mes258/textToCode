@@ -52,33 +52,29 @@ class JavaMethod{
     }
     
     func toFormattedString() -> NSMutableAttributedString{
-       // var outputString = NSMutableAttributedString(string: "\(visability.rawValue) \(returnType) \(name)(){ \n", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)] as [NSAttributedString.Key: Any]);
-        var outputStr: String = "";
-        outputStr += "\(visability.rawValue) \(returnType) \(name)(){ \n"
-        for expression in expressions{
-            outputStr += INDENT;
-            outputStr += "\(expression.toString()) \n";
-        }
-        outputStr += "}";
+        var output = NSMutableAttributedString()
+        output = NSMutableAttributedString(string: self.toString());
         
-        let outputString = NSMutableAttributedString(string: outputStr, attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)] as [NSAttributedString.Key: Any]);
-        return outputString;
+        if let xmethod = SpeechProcessor.state.currentMethod{
+            if xmethod.name == self.name{
+            
+                output.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.init(red: 0.7, green: 0.0, blue: 1.0, alpha: 1.0)] as [NSAttributedString.Key: Any], range: NSRange(location: 0, length: self.toString().count));
+            }
+        }
+        return output
+        
     }
     
-    func toString() -> NSMutableAttributedString{
-        if(SpeechProcessor.state.currentMethod?.getName() == self.getName()){
-            return toFormattedString();
-        }
+    func toString() -> String{
         var outputStr: String = "";
-        outputStr += "\(visability.rawValue) \(returnType) \(name)(){ \n"
+        outputStr += "    \(visability.rawValue) \(returnType) \(name)(){ \n"
         for expression in expressions{
             outputStr += INDENT;
             outputStr += "\(expression.toString()) \n";
         }
-        outputStr += "}";
-        
-        let formattedOutput = NSMutableAttributedString(string: outputStr);
-        return formattedOutput;
+        outputStr += "    } \n";
+    
+        return outputStr;
     }
     
     func getName() -> String{
