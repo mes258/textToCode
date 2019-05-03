@@ -65,11 +65,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         timeLeft -= 1;
         timerLabel.text = "\(timeLeft)";
         if(timeLeft < 1){
-            timer.invalidate();
-            audioEngine.stop()
-            recognitionRequest?.endAudio()
-            recordButton.isEnabled = true
-            recordButton.setTitle("Start Recording", for: .normal)
+            self.audioEngine.stop()
+            self.timer?.invalidate();
+            self.recognitionRequest?.endAudio()
+            self.recordButton.isEnabled = true
+            self.recordButton.setTitle("Start Recording", for: .normal)
         }
     }
     
