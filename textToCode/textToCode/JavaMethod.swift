@@ -65,6 +65,15 @@ class JavaMethod{
         
     }
     
+    func copy() -> JavaMethod{
+        let copy = JavaMethod(name: name, vis: visability.rawValue, returnType: returnType)
+        for expression in expressions{
+            copy.expressions.append(expression.copy())
+        }
+        copy.inStructure = inStructure
+        return copy
+    }
+    
     func toString() -> String{
         var outputStr: String = "";
         outputStr += "    \(visability.rawValue) \(returnType) \(name)(){ \n"

@@ -99,6 +99,19 @@ class JavaState{
         return output
     }
     
+    func copy() -> JavaState{
+        let copy = JavaState()
+        for xclass in classes{
+            copy.classes.append(xclass.copy())
+        }
+        copy.currentClass = currentClass
+        copy.currentMethod = currentMethod
+        copy.atline = atline
+        
+        return copy
+        
+    }
+    
     func toFormattingString() -> NSMutableAttributedString{
         let output = NSMutableAttributedString()
         for xclass in classes{
