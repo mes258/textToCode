@@ -9,7 +9,7 @@
 import Foundation
 
 class JavaElse: JavaExpression{
-    private var INDENT = "    ";
+    private var INDENT = "\t";
     private var expressions: [JavaExpression] = [];
     
     
@@ -22,12 +22,13 @@ class JavaElse: JavaExpression{
     
     override func toString() -> String{
         var outputString = "";
-        outputString += "else { \n"
+        outputString += "\(INDENT)else { \n"
         for expression in expressions{
-            outputString += INDENT;
+            outputString += INDENT + INDENT;
             outputString += expression.toString();
             outputString += "\n"
         }
+        outputString += INDENT + INDENT;
         outputString += "} \n"
         return outputString;
     }

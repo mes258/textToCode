@@ -10,6 +10,7 @@ import Foundation
 
 //Variables in methods
 class JavaExpVariables: JavaExpression{
+    private var INDENT = "\t";
     private var name: String;
     private var visability: ItemVisability;
     private final var type: String;
@@ -28,9 +29,9 @@ class JavaExpVariables: JavaExpression{
     
     override func toString() -> String{
         if value == nil{
-            return "    \(visability.rawValue) \(type) \(name);"
+            return "\(INDENT)\(type) \(name);"
         }else{
-            return "    \(visability.rawValue) \(type) \(name) = \(value ?? "you should never see this");"
+            return "\(INDENT)\(type) \(name) = \(value ?? "you should never see this");"
         }
     }
 }

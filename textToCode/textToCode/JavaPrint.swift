@@ -9,7 +9,7 @@
 import Foundation
 
 class JavaPrint: JavaExpression{
-    private var INDENT = "    ";
+    private var INDENT = "\t";
     var printStatement: String
     
     init(printStmt: String){
@@ -17,6 +17,6 @@ class JavaPrint: JavaExpression{
     }
     
     override func toString() -> String{
-        return "    System.out.println(\(self.printStatement));\n"
+        return "\(INDENT)System.out.println(\(self.printStatement));\n"
     }
 }

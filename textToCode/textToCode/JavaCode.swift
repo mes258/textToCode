@@ -9,14 +9,16 @@
 import Foundation
 
 class JavaCode: JavaExpression{
+    private var INDENT = "\t";
     private var exp: String;
     
     init(exp: String) {
+        print("new expression: \(exp)");
         self.exp = exp;
     }
     
     override func toString() -> String{
-        return "    \(self.exp)";
+        return "\(INDENT)\(self.exp);";
     }
     
     

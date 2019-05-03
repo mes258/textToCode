@@ -9,7 +9,7 @@
 import Foundation
 
 class JavaReturn: JavaExpression{
-    private var INDENT = "    ";
+    private var INDENT = "\t";
     var returnValue: String
     
     init(returnString: String){
@@ -17,6 +17,6 @@ class JavaReturn: JavaExpression{
     }
     
     override func toString() -> String{
-        return "    return \(self.returnValue);\n"
+        return "\(INDENT)return \(self.returnValue);\n"
     }
 }
