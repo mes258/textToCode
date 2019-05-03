@@ -14,7 +14,7 @@ class JavaState{
     var currentClass: JavaClass? = nil;
     var currentMethod: JavaMethod? = nil;
     var atline: Int = 0;
-    var previousState: JavaState = JavaState();
+    var previousState: JavaState? = nil;
     init() {
         
     }

@@ -44,13 +44,11 @@ class SpeechProcessor {
         for wordIndex in 0..<resultArr.count{
             
             //UNDO:
-            if(resultArr[wordIndex] ~= "undo"){
-            state = state.previousState;
+            if(resultArr[wordIndex] ~= "undo" && state.previousState != nil){
+                state = state.previousState!;
                 break;
             }
-            
-            state.updatePrevious;
-            
+            state.updatePrevious()
             
             //NEW CLASS: eg: "new private class dog stop "
             if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "c"){
