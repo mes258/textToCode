@@ -35,7 +35,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //testInput();
         recordButton.isEnabled = false
         speechRecognizer!.delegate = self
         SFSpeechRecognizer.requestAuthorization { (authStatus) in
@@ -58,69 +57,25 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 self.recordButton.isEnabled = isButtonEnabled
             }
         }
-        
-       //self.setUpHelpMenu();
-
-        
-        
     }
-//
-//    func setUpHelpMenu(){
-//        var menuText: String = "How to use Speech to Java";
-//        self.helpLabel?.text = menuText;
-//    }
+
     
     @objc func tick(_ timer: Timer) {
         timeLeft -= 1;
         timerLabel.text = "\(timeLeft)";
         if(timeLeft < 1){
-            self.audioEngine.stop()
-            self.timerLabel.text = "55";
-            self.timer?.invalidate();
-            self.recognitionRequest?.endAudio()
-            self.recordButton.isEnabled = true
-            self.recordButton.setTitle(" Start ", for: .normal)
+            stopAudioRecording();
         }
     }
     
-    public func testInput(){
-        sendInput(input: "New private class dog stop");
-        sendInput(input: "New public method hello returns string stop");
-        sendInput(input: "return \"hello how are you\" stop");
-        sendInput(input: "new public method count legs returns integer stop");
-        sendInput(input: "new private variable integer number of legs equals seven plus five stop");
-        sendInput(input: "while number of legs greater than 4 stop");
-        sendInput(input: "numberOfLegs plus plus stop");
-        
-        
-        sendInput(input: "print number of legs stop");
-        
-        
+    func stopAudioRecording(){
+        self.audioEngine.stop()
+        self.timerLabel.text = "55";
+        self.timer?.invalidate();
+        self.recognitionRequest?.endAudio()
+        self.recordButton.isEnabled = true
+        self.recordButton.setTitle(" Start ", for: .normal)
     }
-    
-    private func sendInput(input: String){
-        self.textOutput.attributedText = SpeechProcessor.processInput(result: input);
-    }
-    
-    /*
-     new private class dog stop
-     new private method hello returns string stop
-     return hello how are you stop
-     new public method count legs returns integer stop
-     new private variable integer i equals seven plus five stop
-     while i less than 4 stop
-     i plus plus stop
-     print i stop
-     if i equals 4 stop
-     i equals two stop
-     print i stop
-     else if i equals 5 stop
-     i minus minus stop
-     print i stop
-     else
-     print i stop
-     return i plus 5 stop
- */
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
             recordButton.isEnabled = true
@@ -131,12 +86,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     @IBAction func recordPressed(_ sender: UIButton) {
         if audioEngine.isRunning {
-            timer?.invalidate();
-            timerLabel.text = "55";
-            audioEngine.stop()
-            recognitionRequest?.endAudio()
-            recordButton.isEnabled = true
-            recordButton.setTitle(" Start ", for: .normal)
+            stopAudioRecording()
         } else {
             timeLeft = 56;
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(tick(_:)), userInfo: nil, repeats: true)
@@ -172,20 +122,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         recognitionTask = speechRecognizer!.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
             var isFinal = false;
             if result != nil {
-                //print("Current input::: \(String(describing: result?.bestTranscription.formattedString))");
                 //Check for input division
                 if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 1].substring.lowercased().contains("stop"))! && firstSegment < (result?.bestTranscription.segments.count)!){
 
                     if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 2].substring.lowercased().contains("stop"))!){
-                        self.audioEngine.stop()
-                        self.timerLabel.text = "55";
-                        self.timer?.invalidate();
                         inputNode.removeTap(onBus: 0)
-                        self.recognitionRequest?.endAudio()
-                        self.recordButton.isEnabled = true
-                        self.recordButton.setTitle(" Start ", for: .normal)
+                        self.stopAudioRecording()
                     }else{
-                        
                         //Only pasrse the new segments
                         let allSegments: [SFTranscriptionSegment] = (result?.bestTranscription.segments)!;
                         let newSegments = Array(allSegments.suffix(from: firstSegment));
@@ -199,20 +142,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                         //update first segment:
                         firstSegment = (result?.bestTranscription.segments.count)!;
                     }
-                    
                 }
-                
                 isFinal = (result?.isFinal)!
             }
             
             if error != nil || isFinal {
-                self.timer?.invalidate();
-                self.audioEngine.stop()
-                self.timerLabel.text = "55";
                 inputNode.removeTap(onBus: 0)
-                self.recognitionRequest = nil
-                self.recognitionTask = nil
-                self.recordButton.isEnabled = true
+                self.stopAudioRecording()
             }
         })
         
@@ -222,27 +158,21 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
         
         audioEngine.prepare()
-        
         do {
             try audioEngine.start()
         } catch {
             print("audioEngine couldn't start because of an error.")
         }
-        
     }
     
     func parseInput(resultArr: [SFTranscriptionSegment]) -> NSMutableAttributedString{
         var resultStr: String = "";
         for seg in resultArr{
-            //Need to remove /n characters
            if(seg.substring.contains("stop")){
                 resultStr += seg.substring;
            }else{
                 resultStr += seg.substring;
                 resultStr += " ";
-            
-                //let newString = seg.substring.replacingOccurrences(of: "stop", with: " ")
-                //resultStr += newString;
             }
         }
         return SpeechProcessor.processInput(result: resultStr);
@@ -266,8 +196,5 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         controller.excludedActivityTypes = [.postToTwitter, .assignToContact, .saveToCameraRoll]
         
         self.present(controller, animated: true, completion: nil)
-        
     }
-    
 }
-

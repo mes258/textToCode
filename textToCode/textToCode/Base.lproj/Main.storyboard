@@ -140,6 +140,10 @@ Exit:
 Exit a control structure
 "exit stop"
 
+Undo: 
+Undo the previous statement
+"undo stop"
+
 Clear: 
 Clear the current input
 "Clear stop"
@@ -179,12 +183,14 @@ Make a while loop:
 "While &lt;condition&gt; stop"
 Eg: "while radius equals seven stop"
 
-
 Make a return Statement: 
 "return &lt;returnValue&gt; stop"
 
 Make a print Statement: 
 "Print &lt;returnValue&gt; stop"
+
+Makea comment: 
+"comment &lt;statement&gt; stop"
 </mutableString>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>

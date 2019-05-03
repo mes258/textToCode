@@ -8,6 +8,10 @@ Exit:
 Exit a control structure
 "exit stop"
 
+Undo: 
+Undo the previous statement
+"undo stop"
+
 Clear: 
 Clear the current input
 "Clear stop"
@@ -47,9 +51,11 @@ Make a while loop:
 "While <condition> stop"
 Eg: "while radius equals seven stop"
 
-
 Make a return Statement: 
 "return <returnValue> stop"
 
 Make a print Statement: 
 "Print <returnValue> stop"
+
+Makea comment: 
+"comment <statement> stop"

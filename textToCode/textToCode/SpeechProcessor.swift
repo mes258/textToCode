@@ -12,7 +12,6 @@ class SpeechProcessor {
     
     static var state: JavaState = JavaState.init();
     static let specialWords = ["equals": "=",
-                               "booleanEquals": "=",
                                "plus": "+",
                                "minus": "-",
                                "divide": "/",
@@ -38,11 +37,12 @@ class SpeechProcessor {
                                ]
     
     static func processInput(result: String) -> NSMutableAttributedString{
+        //Convert input into [String]
         let lowerCaseResult: String = result.lowercased();
-        let resultArr1 = lowerCaseResult.components(separatedBy: " ");
-        var resultArr = resultArr1.prefix(resultArr1.count - 1);
+        let fullResultArr = lowerCaseResult.components(separatedBy: " ");
+        //Remove stop from the end of the input
+        var resultArr = fullResultArr.prefix(fullResultArr.count - 1);
         for wordIndex in 0..<resultArr.count{
-            
             //UNDO:
             if(resultArr[wordIndex] ~= "undo" && state.previousState != nil){
                 state = state.previousState!;
