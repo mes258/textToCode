@@ -16,6 +16,7 @@ class SpeechProcessor {
                                "plus": "+",
                                "minus": "-",
                                "divide": "/",
+                               "divided": "/",
                                "open parenthesis": "(",
                                "close parenthiesis": ")",
                                "and": "&&",
@@ -32,7 +33,7 @@ class SpeechProcessor {
                                "eight": "8",
                                "nine": "9",
                                "ten": "10",
-                               
+                               "times": "*",
                                ]
     
     static func processInput(result: String) -> NSMutableAttributedString{
