@@ -84,6 +84,7 @@ class SpeechProcessor {
             if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "c"){
                 print("In new class");
                 state.addClass(newClass: JavaClass.init(className: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])).uppercasingFirst, vis: resultArr[wordIndex + 1]));
+                break;
             }
             
             //NEW METHOD: eg: "new public method kick returns boolean stop"
