@@ -14,7 +14,7 @@ class JavaState{
     var currentClass: JavaClass? = nil;
     var currentMethod: JavaMethod? = nil;
     var atline: Int = 0;
-    
+    var previousState: JavaState = JavaState();
     init() {
         
     }
@@ -99,6 +99,10 @@ class JavaState{
         return output
     }
     
+    func updatePrevious(){
+        previousState = copy()
+    }
+    
     func copy() -> JavaState{
         let copy = JavaState()
         for xclass in classes{
@@ -107,9 +111,9 @@ class JavaState{
         copy.currentClass = currentClass
         copy.currentMethod = currentMethod
         copy.atline = atline
+        copy.previousState = previousState
         
         return copy
-        
     }
     
     func toFormattingString() -> NSMutableAttributedString{
