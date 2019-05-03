@@ -45,6 +45,17 @@ class JavaClass{
         })
     }
     
+    func copy() -> JavaClass{
+        let copy = JavaClass(className: name, vis: visability.rawValue)
+        for xvar in classVariables{
+            copy.classVariables.append(xvar.copy())
+        }
+        for xmethod in methods{
+            copy.methods.append(xmethod.copy())
+        }
+        return copy
+    }
+    
     func toString() -> String{
         var outputStr: String = "";
         outputStr += "\(visability.rawValue) class \(name)(){"
