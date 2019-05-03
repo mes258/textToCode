@@ -35,7 +35,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         testInput();
+        self.textOutput.attributedText = SpeechProcessor.state.toFormattingString();
         recordButton.isEnabled = false
         speechRecognizer!.delegate = self
         SFSpeechRecognizer.requestAuthorization { (authStatus) in

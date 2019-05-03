@@ -16,7 +16,7 @@ class JavaVariable{
     init(name: String, vis: String, type: String) {
         self.name = name;
         self.visability = ItemVisability(rawValue: vis) ?? ItemVisability.defaultItem;
-        self.type = type;
+        self.type = type.uppercasingFirst;
     }
     
     func getName() -> String{

@@ -148,6 +148,9 @@ Clear:
 Clear the current input
 "Clear stop"
 
+Stop Recording: 
+Say "stop" two consecutive times to stop recording. The first "stop" can be from a previous command.
+
 
 Make New Classes: 
 "New &lt;visibility&gt; class &lt;className&gt; stop"
