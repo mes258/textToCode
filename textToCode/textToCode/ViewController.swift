@@ -168,6 +168,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                     if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 2].substring.lowercased().contains("stop"))!){
                         self.audioEngine.stop()
                         self.timer?.invalidate();
+                        inputNode.removeTap(onBus: 0)
                         self.recognitionRequest?.endAudio()
                         self.recordButton.isEnabled = true
                         self.recordButton.setTitle("Start Recording", for: .normal)

@@ -28,7 +28,7 @@ class JavaIf: JavaExpression{
             outputString += INDENT + INDENT;
             outputString += expression.toString();
         }
-        outputString += INDENT + INDENT;
+        outputString += INDENT;
         outputString += "} \n"
         return outputString;
     }
