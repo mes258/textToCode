@@ -23,7 +23,6 @@
 		1E9BA1302278A736005BB417 /* SpeechProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA12F2278A736005BB417 /* SpeechProcessor.swift */; };
 		1E9BA1322278AE19005BB417 /* JavaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1312278AE19005BB417 /* JavaState.swift */; };
 		1E9BA1342278B05F005BB417 /* JavaIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1332278B05F005BB417 /* JavaIf.swift */; };
-		1E9BA1362278B08F005BB417 /* JavaFor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1352278B08F005BB417 /* JavaFor.swift */; };
 		1E9BA1382278B09D005BB417 /* JavaWhile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1372278B09D005BB417 /* JavaWhile.swift */; };
 		1E9BA13A2278B0B9005BB417 /* JavaExpVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA1392278B0B9005BB417 /* JavaExpVariables.swift */; };
 		1E9BA13C2278B0D0005BB417 /* JavaReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9BA13B2278B0D0005BB417 /* JavaReturn.swift */; };
@@ -49,7 +48,6 @@
 		1E9BA12F2278A736005BB417 /* SpeechProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechProcessor.swift; sourceTree = "<group>"; };
 		1E9BA1312278AE19005BB417 /* JavaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaState.swift; sourceTree = "<group>"; };
 		1E9BA1332278B05F005BB417 /* JavaIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaIf.swift; sourceTree = "<group>"; };
-		1E9BA1352278B08F005BB417 /* JavaFor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaFor.swift; sourceTree = "<group>"; };
 		1E9BA1372278B09D005BB417 /* JavaWhile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaWhile.swift; sourceTree = "<group>"; };
 		1E9BA1392278B0B9005BB417 /* JavaExpVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaExpVariables.swift; sourceTree = "<group>"; };
 		1E9BA13B2278B0D0005BB417 /* JavaReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaReturn.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 				1E9BA1332278B05F005BB417 /* JavaIf.swift */,
 				1E173643227B431E00B66AAF /* JavaElseIf.swift */,
 				1E173641227B431500B66AAF /* JavaElse.swift */,
-				1E9BA1352278B08F005BB417 /* JavaFor.swift */,
 				1E9BA1372278B09D005BB417 /* JavaWhile.swift */,
 				1E9BA1392278B0B9005BB417 /* JavaExpVariables.swift */,
 				1E17363F227A39FB00B66AAF /* JavaCode.swift */,
@@ -196,7 +193,6 @@
 				1E424A3F226CDC4500AFA493 /* JavaVariable.swift in Sources */,
 				1E424A3D226CDB8500AFA493 /* JavaMethod.swift in Sources */,
 				1E9BA13C2278B0D0005BB417 /* JavaReturn.swift in Sources */,
-				1E9BA1362278B08F005BB417 /* JavaFor.swift in Sources */,
 				BFE34F352270062800A046B0 /* Strings.swift in Sources */,
 				1E173646227B6A6300B66AAF /* JavaPrint.swift in Sources */,
 				1E9BA1302278A736005BB417 /* SpeechProcessor.swift in Sources */,
