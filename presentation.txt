@@ -1,0 +1,9 @@
+1. short demo
+new public class circle stop
+  new public variable double radius stop
+  new method get circumference returns double stop
+  new variable double pie equals three point one four stop
+  if radius less zero stop
+    return zero stop
+  else stop
+    return radius times pi times two stop
