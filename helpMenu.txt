@@ -1,39 +1,3 @@
-1. short demo
-new public class circle stop
-  new public variable double radius stop
-  new public method get circumference returns double stop
-  new variable double pie equals three point one four stop
-  if radius less zero stop
-    return zero stop
-    exit stop
-  else stop
-    return radius times pi times two stop
-
-2. We have less than a minute of speech recognition at a time
-- this is imposed by apple
-- apple announced at the worldwide developer conferece in 2016 that they are open to making exceptions to this rule
-- our app deals with this by showing a timer in the top right (remaining time)
-- we have to pause at different times
-
-3. Show multi-class program
-new public class fish stop
-  new public method swim returns void stop
-    print quote the fish is swimming end quote stop
-  new public method drink returns Integer stop
-    while true stop
-      return 5 stop
-new public class square stop
-  new private variable double size stop
-
-4. Mention highlighting of active region, show goto
-
-5. show sharing capabilities
-- text
-- email
-- air drop
-  - air drop to computer
-  - show that it can be opened in text editor as a java file
-
 
 Key Words: 
 Go To: 
@@ -89,8 +53,3 @@ Make a return Statement:
 
 Make a print Statement: 
 "Print <returnValue> stop"
-
-
-
-
-
