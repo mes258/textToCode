@@ -19,6 +19,9 @@ new public class circle stop
 new public class fish stop
   new public method swim returns void stop
     print quote the fish is swimming end quote stop
+  new public method drink returns Integer stop
+    while true stop
+      return 5 stop
 new public class square stop
   new private variable double size stop
 
