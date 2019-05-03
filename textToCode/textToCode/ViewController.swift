@@ -75,10 +75,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         timerLabel.text = "\(timeLeft)";
         if(timeLeft < 1){
             self.audioEngine.stop()
+            self.timerLabel.text = "55";
             self.timer?.invalidate();
             self.recognitionRequest?.endAudio()
             self.recordButton.isEnabled = true
-            self.recordButton.setTitle("Start Recording", for: .normal)
+            self.recordButton.setTitle(" Start ", for: .normal)
         }
     }
     
@@ -131,15 +132,16 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBAction func recordPressed(_ sender: UIButton) {
         if audioEngine.isRunning {
             timer?.invalidate();
+            timerLabel.text = "55";
             audioEngine.stop()
             recognitionRequest?.endAudio()
             recordButton.isEnabled = true
-            recordButton.setTitle("Start Recording", for: .normal)
+            recordButton.setTitle(" Start ", for: .normal)
         } else {
             timeLeft = 56;
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(tick(_:)), userInfo: nil, repeats: true)
             startRecording()
-            recordButton.setTitle("Stop Recording", for: .normal)
+            recordButton.setTitle(" Stop ", for: .normal)
         }
     }
     
@@ -176,11 +178,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
 
                     if((result?.bestTranscription.segments[(result?.bestTranscription.segments.count)! - 2].substring.lowercased().contains("stop"))!){
                         self.audioEngine.stop()
+                        self.timerLabel.text = "55";
                         self.timer?.invalidate();
                         inputNode.removeTap(onBus: 0)
                         self.recognitionRequest?.endAudio()
                         self.recordButton.isEnabled = true
-                        self.recordButton.setTitle("Start Recording", for: .normal)
+                        self.recordButton.setTitle(" Start ", for: .normal)
                     }else{
                         
                         //Only pasrse the new segments
@@ -205,6 +208,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             if error != nil || isFinal {
                 self.timer?.invalidate();
                 self.audioEngine.stop()
+                self.timerLabel.text = "55";
                 inputNode.removeTap(onBus: 0)
                 self.recognitionRequest = nil
                 self.recognitionTask = nil

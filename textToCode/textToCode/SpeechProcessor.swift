@@ -42,42 +42,7 @@ class SpeechProcessor {
         let lowerCaseResult: String = result.lowercased();
         let resultArr1 = lowerCaseResult.components(separatedBy: " ");
         var resultArr = resultArr1.prefix(resultArr1.count - 1);
-        /* SCRIPT::
-         big test phrase:
-         
-         
-         new private class dog stop
-             new private method hello returns string stop
-                return hello how are you stop
-             new public method count legs returns integer stop
-                new private variable integer i equals seven plus five stop
-                while i less than 4 stop
-                    i plus plus stop
-                    print i stop
-                if i equals 4 stop
-                    i equals two stop
-                    print i stop
-                else if i equals 5 stop
-                    i minus minus stop
-                    print i stop
-                else
-                    print i stop
-                    return i plus 5 stop
-         
-         //Other test phrases:
-         
-         new public variable boolean bye stop
-         new private method good bye returns integer stop
-         while bye equals true stop
-            return bye stop
-         new public variable string hi there equals seven stop
-         
-         if bye equals true stop
-            bye equals false stop
-         else stop
-            bye equals true stop
- 
-         */
+        
         for wordIndex in 0..<resultArr.count{
             
             //NEW CLASS: eg: "new private class dog stop "

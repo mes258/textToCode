@@ -39,9 +39,11 @@ Key Words:
 Go To: 
 Move to a different class or method
 "Go To <Class or method name> stop"
+
 Exit: 
 Exit a control structure
 "exit stop"
+
 Clear: 
 Clear the current input
 "Clear stop"
