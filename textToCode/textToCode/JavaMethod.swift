@@ -17,7 +17,6 @@ class JavaMethod{
     var expressions: [JavaExpression] = [];
     private var inStructure = false;
     
-    //Need to account for parameters
     init(name: String, vis: String, returnType: String) {
         self.name = name;
         self.visability = ItemVisability(rawValue: vis) ?? ItemVisability.defaultItem;

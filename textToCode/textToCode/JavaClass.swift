@@ -35,10 +35,6 @@ class JavaClass{
         classVariables.append(JavaVariable.init(name: varName, vis: vis, type: type));
     }
     
-//    func addMethodVar(method: Int, varName: String, vis: String, type: String){
-//        methods[method].addVar(varName: varName, vis: vis, type: type);
-//    }
-    
     func findMethod(_ methodName: String) -> JavaMethod?{
         return methods.first(where: { (m:JavaMethod) -> Bool in
              return m.getName() == methodName
@@ -83,8 +79,6 @@ class JavaClass{
             output.append(formattedVar)
         }
         for xmethod in methods{
-//            var tab = NSMutableAttributedString(string: "\t");
-//            output.append(tab);
             output.append(xmethod.toFormattedString())
         }
         
@@ -94,7 +88,6 @@ class JavaClass{
         if let xclass = SpeechProcessor.state.currentClass{
             if xclass.name == self.name && SpeechProcessor.state.currentMethod == nil{
                 output = NSMutableAttributedString(string: self.toString());
-                
                 output.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.init(red: 0.7, green: 0.0, blue: 1.0, alpha: 1.0)] as [NSAttributedString.Key: Any], range: NSRange(location: 0, length: self.toString().count));
             }
         }

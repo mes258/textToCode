@@ -9,11 +9,9 @@
 import Foundation
 
 class JavaState{
-    //We should make this a singleton or cache it
     var classes: [JavaClass] = [];
     var currentClass: JavaClass? = nil;
     var currentMethod: JavaMethod? = nil;
-    var atline: Int = 0;
     var previousState: JavaState? = nil;
     init() {
         
@@ -110,7 +108,6 @@ class JavaState{
         }
         copy.currentClass = currentClass
         copy.currentMethod = currentMethod
-        copy.atline = atline
         copy.previousState = previousState
         
         return copy
