@@ -67,6 +67,10 @@ class JavaClass{
         var output = NSMutableAttributedString()
         var classHead = NSMutableAttributedString(string: "\(visability.rawValue) class \(name)(){ \n");
         output.append(classHead);
+        for classVar in classVariables{
+            var formattedVar = NSMutableAttributedString(string: "    \(classVar.toString()) \n");
+            output.append(formattedVar)
+        }
         for xmethod in methods{
 //            var tab = NSMutableAttributedString(string: "\t");
 //            output.append(tab);
