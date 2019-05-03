@@ -13,7 +13,7 @@ class JavaCode: JavaExpression{
     private var exp: String;
     
     init(exp: String) {
-        print("new expression: \(exp)");
+       /// print("new expression: \(exp)");
         self.exp = exp;
     }
     

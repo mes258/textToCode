@@ -36,160 +36,6 @@ class SpeechProcessor {
                                "times": "*",
                                ]
     
-    static func processInput(result: String) -> NSMutableAttributedString{
-        //Convert input into [String]
-        let lowerCaseResult: String = result.lowercased();
-        let fullResultArr = lowerCaseResult.components(separatedBy: " ");
-        //Remove stop from the end of the input
-        var resultArr = fullResultArr.prefix(fullResultArr.count - 1);
-        for wordIndex in 0..<resultArr.count{
-            //UNDO:
-            if(resultArr[wordIndex] ~= "undo" && state.previousState != nil){
-                state = state.previousState!;
-                break;
-            }
-            state.updatePrevious()
-            
-            //NEW CLASS: eg: "new private class dog stop "
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "c"){
-                print("In new class");
-                state.addClass(newClass: JavaClass.init(className: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])).uppercasingFirst, vis: resultArr[wordIndex + 1]));
-                break;
-            }
-            
-            //NEW METHOD: eg: "new public method kick returns boolean stop"
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "m"){
-                print("In new method");
-                state.currentClass?.addMethod(methodName: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count - 2])), vis: resultArr[wordIndex + 1], returnType: resultArr[resultArr.count - 1]);
-                state.currentMethod = state.currentClass?.methods[(state.currentClass?.methods.count)! - 1];
-                break;
-            }
-            
-           //NEW VAR: eg: "new private variable String leg stop"
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "v"){
-                if state.currentMethod == nil{
-                    //NEW CLASS VAR: eg: "new private variable String leg"
-                    print("In new class var");
-                    state.currentClass?.addVar(varName: wordListToCamelCase(Array(resultArr[wordIndex + 4..<resultArr.count])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3]);
-                    break;
-                }
-            }
-                
-            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 1].first ~= "v"){
-                if(resultArr.contains("equals")){
-                    //NEW METHOD VAR: eg: "new variable int size equals seven"
-                    print("in new method var");
-                    let equalsInt = findIndexOf(targetWord: "equals", phrase: Array(resultArr[wordIndex..<resultArr.count]))
-                    
-                    let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<equalsInt])), type: resultArr[wordIndex + 2], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
-                    state.currentMethod?.addExpression(exp: newVar);
-                    break;
-                }else{
-                    //NEW method VAR: eg: "new variable String leg"
-                    print("In new method var");
-                    let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])), type: resultArr[wordIndex + 2], value: nil);
-                    state.currentMethod?.addExpression(exp: newVar);
-                    break;
-                }
-            }
-            
-            //while bye equals true stop
-            //WHILE: eg: while bye equals true stop
-            if(resultArr[wordIndex].first ~= "w"){
-                print("In new while");
-                let condition: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
-                let newWhile: JavaWhile = JavaWhile.init(condition: condition)
-                
-                state.currentMethod?.addExpression(exp: newWhile)
-                break;
-            }
-            
-            //return bye stop
-            //RETURN: eg: return bye stop
-            if(resultArr[wordIndex].first ~= "r"){
-                let returnVal: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
-                let newReturn: JavaReturn = JavaReturn.init(returnString: returnVal);
-                state.currentMethod?.addExpression(exp: newReturn);
-                break;
-            }
-            
-//            if bye equals true stop
-//            bye equals false stop
-//            else stop
-//            bye equals true stop
-            
-            //IF: eg: see above^
-            
-            if(resultArr[wordIndex].first ~= "i"){
-                let condition: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
-                let newIf: JavaIf = JavaIf.init(condition: condition);
-                state.currentMethod?.addExpression(exp: newIf);
-                break;
-            }
-            
-            //else
-            if(resultArr[wordIndex] ~= "else" && resultArr.count == 1){
-//                let condition: String = Array(resultArr[wordIndex + 1..<resultArr.count]).joined(separator: " ");
-                let newElse: JavaElse = JavaElse.init();
-                state.currentMethod?.addExpression(exp: newElse);
-                break;
-            }
-            
-            //ELSE IF:
-            if(resultArr[wordIndex] ~= "else" && resultArr[wordIndex + 1] ~= "if"){
-                let condition: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
-                let newElseIf: JavaElseIf = JavaElseIf.init(condition: condition);
-                state.currentMethod?.addExpression(exp: newElseIf);
-                break;
-            }
-                
-            //PRINT:
-            if(resultArr[wordIndex] ~= "print"){
-                let printStatement: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
-                let newPrint: JavaPrint = JavaPrint.init(printStmt: printStatement);
-                state.currentMethod?.addExpression(exp: newPrint);
-                break;
-            }
-            
-            //COMMENTS:
-            if(resultArr[wordIndex] ~= "comment"){
-                let commentStatement: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
-                let newComment: JavaComment = JavaComment.init(commentVal: commentStatement);
-                state.currentMethod?.addExpression(exp: newComment);
-                break;
-            }
-                
-            if(resultArr[wordIndex] ~= "go" && resultArr[wordIndex + 1] ~= "to" ){
-                let name: String = wordListToCamelCase(scanPhrase(inputPhrase: Array(resultArr[wordIndex + 2..<resultArr.count]), isCondition: true));
-                print(name);
-                state.goto(name);
-                break;
-            }
-            
-            if(resultArr[wordIndex] ~= "exit"){
-                state.currentMethod?.exitExpression();
-                break;
-            }
-                
-            if(resultArr[wordIndex] ~= "clear"){
-                SpeechProcessor.state = JavaState()
-                break;
-            }
-                
-                
-            else{
-                let line: String = scanPhrase(inputPhrase: Array(resultArr[wordIndex..<resultArr.count]), isCondition: false).joined(separator: " ");
-                let lineOfCode: JavaCode = JavaCode.init(exp: line)
-                state.currentMethod?.addExpression(exp: lineOfCode);
-                break;
-            }
-            
-        }
-        
-        return state.toFormattingString();
-        
-    }
-    
     static func wordListToCamelCase(_ words: [String]) -> String{
         return words.joined(separator: " ").camelized
     }
@@ -201,9 +47,8 @@ class SpeechProcessor {
             return -1;
         }
     }
-
+    
     static func scanPhrase(inputPhrase: [String], isCondition: Bool) -> [String]{
-        //print(inputPhrase);
         var phrase = inputPhrase;
         var removeWords: [Int] = [];
         var inQuote = false;
@@ -236,9 +81,140 @@ class SpeechProcessor {
         return phrase;
     }
     
-    //input like: new class fish; new private class head shoulders knees toes
-    //TODO: make this? or don't? idk
-    static func stringsToClass(_ : [String]) -> JavaClass {
-        return JavaClass(className: "", vis: "public")
+    static func otherInput(resultArr: ArraySlice<String>){
+        let line: String = scanPhrase(inputPhrase: Array(resultArr[0..<resultArr.count]), isCondition: false).joined(separator: " ");
+        let lineOfCode: JavaCode = JavaCode.init(exp: line)
+        state.currentMethod?.addExpression(exp: lineOfCode);
+    }
+    
+    static func processInput(result: String) -> NSMutableAttributedString{
+        //Convert input into [String]
+        let lowerCaseResult: String = result.lowercased();
+        let fullResultArr = lowerCaseResult.components(separatedBy: " ");
+        //Remove stop from the end of the input
+        var resultArr = fullResultArr.prefix(fullResultArr.count - 1);
+        let firstWordIndex = 0;
+        var foundInputMatch = false;
+        
+        //UNDO:
+        if(resultArr[firstWordIndex] ~= "undo" && state.previousState != nil){
+            state = state.previousState!;
+            foundInputMatch = true;
+        }
+        state.updatePrevious()
+        
+        if(resultArr.count > 5 && !foundInputMatch){
+            //NEW METHOD
+            if(resultArr[firstWordIndex] ~= "new" && resultArr[firstWordIndex + 2].first ~= "m"){
+                state.currentClass?.addMethod(methodName: wordListToCamelCase(Array(resultArr[firstWordIndex + 3..<resultArr.count - 2])), vis: resultArr[firstWordIndex + 1], returnType: resultArr[resultArr.count - 1]);
+                state.currentMethod = state.currentClass?.methods[(state.currentClass?.methods.count)! - 1];
+                foundInputMatch = true;
+            }
+        }
+        if(resultArr.count > 4 && !foundInputMatch){
+            //NEW METHOD VARIABLE WITH A VALUE
+            if(resultArr[firstWordIndex] ~= "new" && resultArr[firstWordIndex + 1].first ~= "v" && resultArr.contains("equals")){
+                let equalsInt = findIndexOf(targetWord: "equals", phrase: Array(resultArr[firstWordIndex..<resultArr.count]))
+                
+                let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[firstWordIndex + 3..<equalsInt])), type: resultArr[firstWordIndex + 2], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
+                state.currentMethod?.addExpression(exp: newVar);
+                foundInputMatch = true;
+            }
+        }
+        if(resultArr.count > 3 && !foundInputMatch){
+            //NEW CLASS
+            if(resultArr[firstWordIndex] ~= "new" && resultArr[firstWordIndex + 2].first ~= "c"){
+                state.addClass(newClass: JavaClass.init(className: wordListToCamelCase(Array(resultArr[firstWordIndex + 3..<resultArr.count])).uppercasingFirst, vis: resultArr[firstWordIndex + 1]))
+                foundInputMatch = true;
+            }
+            //NEW CLASS VARIABLE
+            else if(resultArr[firstWordIndex] ~= "new" && resultArr[firstWordIndex + 2].first ~= "v" && state.currentMethod == nil){
+                state.currentClass?.addVar(varName: wordListToCamelCase(Array(resultArr[firstWordIndex + 4..<resultArr.count])), vis: resultArr[firstWordIndex + 1], type: resultArr[firstWordIndex + 3]);
+                foundInputMatch = true;
+            }
+            //NEW METHOD VARIABLE WITHOUT INITIAL VARIABLE
+            else if(resultArr[firstWordIndex] ~= "new" && resultArr[firstWordIndex + 1].first ~= "v"){
+                let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[firstWordIndex + 3..<resultArr.count])), type: resultArr[firstWordIndex + 2], value: nil);
+                state.currentMethod?.addExpression(exp: newVar);
+                foundInputMatch = true;
+            }
+        }
+        if(resultArr.count > 2 && !foundInputMatch){
+            //GOTO
+            if(resultArr[firstWordIndex] ~= "go" && resultArr[firstWordIndex + 1] ~= "to" ){
+                let name: String = wordListToCamelCase(scanPhrase(inputPhrase: Array(resultArr[firstWordIndex + 2..<resultArr.count]), isCondition: true));
+                state.goto(name);
+                foundInputMatch = true;
+            }
+        }
+        if(resultArr.count > 1 && !foundInputMatch){
+            //WHILE
+            if(resultArr[firstWordIndex].first ~= "w"){
+                let condition: String = scanPhrase(inputPhrase: Array(resultArr[firstWordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
+                let newWhile: JavaWhile = JavaWhile.init(condition: condition)
+                
+                state.currentMethod?.addExpression(exp: newWhile)
+                foundInputMatch = true;
+            }
+            //RETURN
+            else if(resultArr[firstWordIndex].first ~= "r"){
+                let returnVal: String = scanPhrase(inputPhrase: Array(resultArr[firstWordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
+                let newReturn: JavaReturn = JavaReturn.init(returnString: returnVal);
+                state.currentMethod?.addExpression(exp: newReturn);
+                foundInputMatch = true;
+            }
+            //IF
+            else if(resultArr[firstWordIndex].first ~= "i"){
+                let condition: String = scanPhrase(inputPhrase: Array(resultArr[firstWordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
+                let newIf: JavaIf = JavaIf.init(condition: condition);
+                state.currentMethod?.addExpression(exp: newIf);
+                foundInputMatch = true;
+            }
+            //ELSE IF
+            else if(resultArr[firstWordIndex] ~= "else" && resultArr[firstWordIndex + 1] ~= "if"){
+                let condition: String = scanPhrase(inputPhrase: Array(resultArr[firstWordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
+                let newElseIf: JavaElseIf = JavaElseIf.init(condition: condition);
+                state.currentMethod?.addExpression(exp: newElseIf);
+                foundInputMatch = true;
+            }
+            //PRINT
+            else if(resultArr[firstWordIndex] ~= "print"){
+                let printStatement: String = scanPhrase(inputPhrase: Array(resultArr[firstWordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
+                let newPrint: JavaPrint = JavaPrint.init(printStmt: printStatement);
+                state.currentMethod?.addExpression(exp: newPrint);
+                foundInputMatch = true;
+            }
+            //COMMENTS
+            else if(resultArr[firstWordIndex] ~= "comment"){
+                let commentStatement: String = scanPhrase(inputPhrase: Array(resultArr[firstWordIndex + 1..<resultArr.count]), isCondition: true).joined(separator: " ");
+                let newComment: JavaComment = JavaComment.init(commentVal: commentStatement);
+                state.currentMethod?.addExpression(exp: newComment);
+                foundInputMatch = true;
+            }
+        }
+        if(!foundInputMatch){
+            //ELSE
+            if(resultArr[firstWordIndex] ~= "else"){
+                let newElse: JavaElse = JavaElse.init();
+                state.currentMethod?.addExpression(exp: newElse);
+                foundInputMatch = true;
+            }
+            //EXIT
+            else if(resultArr[firstWordIndex] ~= "exit"){
+                state.currentMethod?.exitExpression();
+                foundInputMatch = true;
+            }
+            //CLEAR
+            else if(resultArr[firstWordIndex] ~= "clear"){
+                SpeechProcessor.state = JavaState()
+                foundInputMatch = true;
+            }
+            //NON-STRUCTURED INPUT
+            else{
+                otherInput(resultArr: resultArr);
+            }
+        }
+        
+        return state.toFormattingString();
     }
 }
