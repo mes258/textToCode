@@ -21,7 +21,7 @@ class JavaMethod{
     init(name: String, vis: String, returnType: String) {
         self.name = name;
         self.visability = ItemVisability(rawValue: vis) ?? ItemVisability.defaultItem;
-        self.returnType = returnType;
+        self.returnType = returnType.uppercasingFirst;
     }
     
     func exitExpression(){

@@ -17,7 +17,7 @@ class JavaExpVariables: JavaExpression{
     
     init(name: String, type: String, value: String?) {
         self.name = name;
-        self.type = type;
+        self.type = type.uppercasingFirst;
         self.value = value;
     }
     
