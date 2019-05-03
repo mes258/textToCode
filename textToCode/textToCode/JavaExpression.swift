@@ -5,13 +5,12 @@
 //  Created by Michael Smith on 4/26/19.
 //  Copyright © 2019 Michael Smith. All rights reserved.
 //
+//  Abstract parent class for control flow, variables, loops, everything else really
+//
 
 import Foundation
 
 class JavaExpression{
-    //Control flow, variables, loops, everything else really
-    //use a set to keep track of key words (declared names in scope)
-    
     
     init() {
         
