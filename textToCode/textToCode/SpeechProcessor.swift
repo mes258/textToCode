@@ -38,11 +38,19 @@ class SpeechProcessor {
                                ]
     
     static func processInput(result: String) -> NSMutableAttributedString{
-    
         let lowerCaseResult: String = result.lowercased();
         let resultArr1 = lowerCaseResult.components(separatedBy: " ");
         var resultArr = resultArr1.prefix(resultArr1.count - 1);
         for wordIndex in 0..<resultArr.count{
+            
+            //UNDO:
+            if(resultArr[wordIndex] ~= "undo"){
+            state = state.previousState;
+                break;
+            }
+            
+            state.updatePrevious;
+            
             
             //NEW CLASS: eg: "new private class dog stop "
             if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 2].first ~= "c"){
@@ -159,12 +167,6 @@ class SpeechProcessor {
                 state.goto(name);
                 break;
             }
-            
-//            //UNDO:
-//            if(resultArr[wordIndex] ~= "undo"){
-//                state = state.getPreviousState;
-//                break;
-//            }
             
             if(resultArr[wordIndex] ~= "exit"){
                 state.currentMethod?.exitExpression();
