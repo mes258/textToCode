@@ -9,7 +9,7 @@
 import Foundation
 
 class JavaWhile: JavaExpression{
-    private var INDENT = "    ";
+    private var INDENT = "\t";
     private var condition: String;
     var expressions: [JavaExpression] = [];
     
@@ -23,14 +23,14 @@ class JavaWhile: JavaExpression{
     
     override func toString() -> String{
         var outputString = "";
-        outputString += "    while(\(self.condition)){ \n"
+        outputString += "\(INDENT)while(\(self.condition)){ \n"
         for expression in expressions{
-            outputString += INDENT;
-            outputString += INDENT;
+            outputString += INDENT + INDENT;
             outputString += expression.toString();
             outputString += "\n"
         }
-        outputString += "        } \n"
+        outputString += INDENT + INDENT;
+        outputString += "} \n"
         return outputString;
     }
 }

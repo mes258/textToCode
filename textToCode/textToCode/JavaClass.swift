@@ -12,7 +12,7 @@ import UIKit
 enum ItemVisability: String{
     case publicItem =  "public"
     case protectedItem = "protected"
-    case defaultItem = "default"
+    case defaultItem = ""
     case privateItem = "private"
 }
 

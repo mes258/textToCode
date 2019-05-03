@@ -9,7 +9,7 @@
 import Foundation
 
 class JavaIf: JavaExpression{
-    private var INDENT = "    ";
+    private var INDENT = "\t";
     private var condition: String;
     private var expressions: [JavaExpression] = [];
     
@@ -23,11 +23,12 @@ class JavaIf: JavaExpression{
     
     override func toString() -> String{
         var outputString = "";
-        outputString += "if(\(self.condition)){ \n"
+        outputString += "\(INDENT)if(\(self.condition)){ \n"
         for expression in expressions{
-            outputString += INDENT;
+            outputString += INDENT + INDENT;
             outputString += expression.toString();
         }
+        outputString += INDENT + INDENT;
         outputString += "} \n"
         return outputString;
     }

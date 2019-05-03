@@ -9,7 +9,7 @@
 import Foundation
 
 class JavaFor: JavaExpression{
-    private var INDENT = "    ";
+    private var INDENT = "\t";
     private var startCondition: String;
     private var endCondition: String;
     private var iterator: String;
