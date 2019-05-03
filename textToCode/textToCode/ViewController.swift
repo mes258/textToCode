@@ -240,6 +240,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         return documentsDirectory
     }
     
+    @IBAction func clear(_ sender: Any) {
+        SpeechProcessor.state = JavaState()
+        textOutput.text = "";
+    }
+    
     @IBAction func share(_ sender: Any) {
         let urls = SpeechProcessor.state.saveFilesAndGetNames()
         

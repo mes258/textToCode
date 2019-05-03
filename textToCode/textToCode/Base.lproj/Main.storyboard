@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,6 +51,7 @@
                                     <action selector="recordPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jlZ-vr-VSt"/>
                                 </connections>
                             </button>
+
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="55" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umQ-ya-di6">
                                 <rect key="frame" x="358" y="50" width="36" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -58,17 +59,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqh-YK-hDD">
+                                <rect key="frame" x="247.66666666666663" y="52" width="36" height="30"/>
+                                <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RdL-Hz-ueb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="4xR-aT-o8z" firstAttribute="centerX" secondItem="ijO-W5-OfQ" secondAttribute="centerX" id="1An-66-vf8"/>
                             <constraint firstItem="vcT-EK-v3K" firstAttribute="top" secondItem="8z6-6C-Bnu" secondAttribute="bottom" constant="6" id="BoC-4J-Qbe"/>
                             <constraint firstAttribute="bottom" secondItem="8z6-6C-Bnu" secondAttribute="bottom" constant="43" id="GJY-kG-lIT"/>
+                            <constraint firstItem="sqh-YK-hDD" firstAttribute="leading" secondItem="4xR-aT-o8z" secondAttribute="trailing" constant="16" id="KwW-kV-vpc"/>
                             <constraint firstItem="4xR-aT-o8z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Nm3-5r-znk"/>
                             <constraint firstItem="ijO-W5-OfQ" firstAttribute="leading" secondItem="8z6-6C-Bnu" secondAttribute="leading" id="Utw-jc-egU"/>
                             <constraint firstItem="ijO-W5-OfQ" firstAttribute="trailing" secondItem="8z6-6C-Bnu" secondAttribute="trailing" id="d4p-4B-S4Z"/>
                             <constraint firstItem="ijO-W5-OfQ" firstAttribute="top" secondItem="4xR-aT-o8z" secondAttribute="bottom" constant="16" id="iQp-wv-YKW"/>
                             <constraint firstItem="8z6-6C-Bnu" firstAttribute="top" secondItem="ijO-W5-OfQ" secondAttribute="bottom" constant="16" id="oEV-im-Kfs"/>
+                            <constraint firstItem="ijO-W5-OfQ" firstAttribute="top" secondItem="sqh-YK-hDD" secondAttribute="bottom" constant="16" id="qRJ-Oa-oiw"/>
                             <constraint firstItem="8z6-6C-Bnu" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qS8-dU-Gd8"/>
                             <constraint firstItem="8z6-6C-Bnu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="rTQ-uf-HEj"/>
                             <constraint firstItem="8z6-6C-Bnu" firstAttribute="centerX" secondItem="vcT-EK-v3K" secondAttribute="centerX" id="xJx-n1-J9H"/>
