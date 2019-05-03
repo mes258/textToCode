@@ -1,5 +1,3 @@
-0. intro
-
 1. short demo
 new public class circle stop
   new public variable double radius stop
@@ -21,10 +19,10 @@ new public class circle stop
 new public class fish stop
   new public method swim returns void stop
     print quote the fish is swimming end quote stop
-  new public method drink returns integer stop
+  new public method drink returns Integer stop
+    while true stop
       return 5 stop
 new public class square stop
-goto square stop
   new private variable double size stop
 
 4. Mention highlighting of active region, show goto

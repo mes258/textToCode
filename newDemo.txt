@@ -1,0 +1,94 @@
+1. short demo
+new public class circle stop
+  new public variable double radius stop
+  new public method get circumference returns double stop
+  new variable double pie equals three point one four stop
+  if radius less zero stop
+    return zero stop
+    exit stop
+  else stop
+    return radius times pi times two stop
+
+2. We have less than a minute of speech recognition at a time
+- this is imposed by apple
+- apple announced at the worldwide developer conferece in 2016 that they are open to making exceptions to this rule
+- our app deals with this by showing a timer in the top right (remaining time)
+- we have to pause at different times
+
+3. Show multi-class program
+new public class fish stop
+  new public method swim returns void stop
+    print quote the fish is swimming end quote stop
+  new public method drink returns Integer stop
+    while true stop
+      return 5 stop
+new public class square stop
+  new private variable double size stop
+
+4. Mention highlighting of active region, show goto
+
+5. show sharing capabilities
+- text
+- email
+- air drop
+  - air drop to computer
+  - show that it can be opened in text editor as a java file
+
+
+Key Words: 
+Go To: 
+Move to a different class or method
+"Go To <Class or method name> stop"
+Exit: 
+Exit a control structure
+"exit stop"
+Clear: 
+Clear the current input
+"Clear stop"
+
+
+Make New Classes: 
+"New <visibility> class <className> stop"
+Eg: "New public class circle stop"
+
+Make New Class Variables: 
+"New <visibility> variable <type> <variableName> stop"
+Eg: "new private variable Integer radius"
+
+Make New Methods: 
+"New <visibility> method <methodName> returns <returnType> stop"
+Eg: "new public method get circumference returns double stop"
+
+Make New Method Variables: 
+"New variable <type> <variableName> stop"
+Eg: "new variable double pi stop"
+OR: 
+"New variable <type> <variableName> equals <value> stop"
+Eg: "new variable double pi equals three point one four stop"
+
+Make New if Statements:
+"If <condition> stop"
+Eg: "if radius less than four stop"
+
+Add an else if: 
+"Else if <condition> stop"
+Eg: "else if radius less than ten stop"
+
+Add an else: 
+"else stop"
+
+Make a while loop: 
+"While <condition> stop"
+Eg: "while radius equals seven stop"
+
+
+Make a return Statement: 
+"return <returnValue> stop"
+
+Make a print Statement: 
+"Print <returnValue> stop"
+
+
+
+
+

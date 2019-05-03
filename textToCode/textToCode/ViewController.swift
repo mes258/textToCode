@@ -32,6 +32,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var bestTranscriptionOutput: UITextView!
     @IBOutlet weak var timerLabel: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //testInput();
@@ -58,8 +59,16 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             }
         }
         
+       //self.setUpHelpMenu();
+
+        
         
     }
+//
+//    func setUpHelpMenu(){
+//        var menuText: String = "How to use Speech to Java";
+//        self.helpLabel?.text = menuText;
+//    }
     
     @objc func tick(_ timer: Timer) {
         timeLeft -= 1;
