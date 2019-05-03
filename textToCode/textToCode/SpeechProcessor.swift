@@ -102,22 +102,24 @@ class SpeechProcessor {
                     print("In new class var");
                     state.currentClass?.addVar(varName: wordListToCamelCase(Array(resultArr[wordIndex + 4..<resultArr.count])), vis: resultArr[wordIndex + 1], type: resultArr[wordIndex + 3]);
                     break;
+                }
+            }
+                
+            if(resultArr[wordIndex] ~= "new" && resultArr[wordIndex + 1].first ~= "v"){
+                if(resultArr.contains("equals")){
+                    //NEW METHOD VAR: eg: "new variable int size equals seven"
+                    print("in new method var");
+                    let equalsInt = findIndexOf(targetWord: "equals", phrase: Array(resultArr[wordIndex..<resultArr.count]))
+                    
+                    let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<equalsInt])), type: resultArr[wordIndex + 2], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
+                    state.currentMethod?.addExpression(exp: newVar);
+                    break;
                 }else{
-                    if(resultArr.contains("equals")){
-                        //NEW METHOD VAR: eg: "new variable int size equals seven"
-                        print("in new method var");
-                        let equalsInt = findIndexOf(targetWord: "equals", phrase: Array(resultArr[wordIndex..<resultArr.count]))
-                        
-                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<equalsInt])), type: resultArr[wordIndex + 2], value: scanPhrase(inputPhrase: Array(resultArr[equalsInt + 1..<resultArr.count]), isCondition: true).joined(separator: " "));
-                        state.currentMethod?.addExpression(exp: newVar);
-                        break;
-                    }else{
-                        //NEW method VAR: eg: "new variable String leg"
-                        print("In new method var");
-                        let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])), type: resultArr[wordIndex + 2], value: nil);
-                        state.currentMethod?.addExpression(exp: newVar);
-                        break;
-                    }
+                    //NEW method VAR: eg: "new variable String leg"
+                    print("In new method var");
+                    let newVar: JavaExpVariables = JavaExpVariables.init(name: wordListToCamelCase(Array(resultArr[wordIndex + 3..<resultArr.count])), type: resultArr[wordIndex + 2], value: nil);
+                    state.currentMethod?.addExpression(exp: newVar);
+                    break;
                 }
             }
             
